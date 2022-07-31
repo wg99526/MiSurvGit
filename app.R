@@ -1,3 +1,19 @@
+rm(list = ls())
+
+list.of.packages <- c('seqinr', 'shinydashboard', 'dashboardthemes', 'tidyverse', 'plotly', 'shinyWidgets', 'shinyjs', 'googleVis', 'xtable', 
+                      'DT', 'htmltools', 'phangorn', 'bios2mds', 'zip', 'zCompositions', 'dplyr', 'forestplot', 'quantreg', 'fossil', 'picante',
+                      'entropart', 'lme4', 'lmerTest', 'broom.mixed', 'gee', 'geepack', 'dirmult', 'robustbase', 'robCompositions', 'BiasedUrn',
+                      'CompQuadForm', 'GUniFrac', 'ecodist', 'MiRKAT', 'gridExtra', 'ggplot2', 'patchwork', 'ggthemes', 'erer', 'DiagrammeR', 'stringr',
+                      'devtools', 'betareg', 'nlme', 'glmm', 'remotes', 'gridGraphics', 'compositions', 'rgl', 'vegan3d', 'pca3d', 'jpeg', 'splitTools', 
+                      'survival', 'survminer', 'coin', 'randomForestSRC', 'kableExtra', 'caret', 'randomForest', 'glmnet')
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+if(!require('phyloseq')) remotes::install_github('joey711/phyloseq')
+if(!require('biomformat')) remotes::install_github('joey711/biomformat')
+
+
 library(seqinr)
 library(shiny)
 library(shinydashboard)
