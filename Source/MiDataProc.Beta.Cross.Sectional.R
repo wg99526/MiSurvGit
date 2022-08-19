@@ -22,7 +22,6 @@ library(CompQuadForm)
 library(GUniFrac) 
 library(ecodist) 
 library(MiRKAT)
-library(GLMMMiRKAT)
 library(proxy)
 
 #####################
