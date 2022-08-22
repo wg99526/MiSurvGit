@@ -10,7 +10,7 @@ Maintainer: Won Gu <wpg5129@psu.edu>
 
 Description: MiCloud-S is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses. MiCloud-S consists of a data processing module and following four data analytic modules as follows.
 
-* Data Processing : Interactive procedures for 1) data inputs (.rdata, .rds, .biom, .txt, .csv, .tsv, .tre), 2) survival data and analytic plans (survival time, censored/event, follow-up period, subgroup analysis), 3) quality controls (kingdom, library size, mean proportion, taxonomic name), and 4) data transformations (alpha- and beta-diversity calculation, rarefaction, proportion, centered log-ratio, arcsine square root).
+* **Data Processing** : Interactive procedures for 1) data inputs (.rdata, .rds, .biom, .txt, .csv, .tsv, .tre), 2) survival data and analytic plans (survival time, censored/event, follow-up period, subgroup analysis), 3) quality controls (kingdom, library size, mean proportion, taxonomic name), and 4) data transformations (alpha- and beta-diversity calculation, rarefaction, proportion, centered log-ratio, arcsine square root).
 
 * **Module 1** : Comparative survival analysis between treatment groups, not involving microbiome data, with or without covariate adjustment.
 
