@@ -16,6 +16,64 @@ library(entropart)
 rem.tax.d <- c("", "metagenome", "gut metagenome", "mouse gut metagenome")
 rem.tax.str.d <- c("uncultured", "incertae", "Incertae", "unidentified", "unclassified", "unknown")
 
+sam_no_miss_cov <- function(sample_dat, covariates){
+  sam.dat <- sample_dat 
+  
+  for (cov in covariates){
+    if(sum(is.na(sam.dat[,cov])) > 0){
+      ind <- which(is.na(sam.dat[, cov]))
+      sam.dat <- sam.dat[-ind, ]
+    }else{
+      sam.dat <- sam.dat
+    }
+  }
+  return(sam.dat)
+}
+
+
+alpha_no_miss_cov<- function(sam_dat, alpha, covariates){
+  
+  for (i in covariates){
+    if(sum(is.na(sam_dat[,i])) > 0){
+      ind <- which(is.na(sam_dat[, i]))
+      sam_dat <- sam_dat[-ind, ]
+      alpha <- alpha[-ind,]
+    }else{
+      sam_dat <- sam_dat
+      alpha <- alpha 
+    }
+  }
+
+  return(alpha)
+}
+
+beta_no_miss_cov<- function(sam_dat, beta, covariates){
+  final_list <- list() 
+  
+  DS <- beta$Ds 
+  KS <- beta$Ks
+  
+  name_1 <- names(DS)
+  name_2 <- names(KS)
+  
+  for (i in covariates){
+    if(sum(is.na(sam_dat[,i])) > 0){
+      ind <- which(is.na(sam_dat[, i]))
+      sam_dat <- sam_dat[-ind, ]
+      for (j in 1:length(beta)){
+        DS[[j]] <- DS[[j]][-ind, -ind]
+        KS[[j]] <- KS[[j]][-ind, -ind]
+      }
+    }
+    names(DS) <- name_1 
+    names(KS) <- name_2 
+  }
+  final_list$Ds <- DS
+  final_list$Ks <- KS
+  
+  return(final_list)
+}
+
 tax.tab.clean <- function(tax.tab, rem.tax = rem.tax.d, rem.tax.str = rem.tax.str.d, na.code = "NANANA") {
   tax.tab.c <- tax.tab
   for (i in 1:ncol(tax.tab)) {
@@ -401,7 +459,7 @@ num.tax.rank <- function(tax.tab, rem.tax = rem.tax.d, rem.tax.str = rem.tax.str
 lib.size.func <- function(biom) {
   otu.tab <- otu_table(biom)
   lib.size <- colSums(otu.tab)
-  lib.size.sum <- c(mean(lib.size, na.rm = T), quantile(lib.size, na.rm = T))
+  lib.size.sum <- c(mean(lib.size), quantile(lib.size))
   names(lib.size.sum) <- c("Mean", "Minimum", "1st quartile", "Median", "3rd quartile", "Maximum")
   return(list(lib.size = lib.size, lib.size.sum = lib.size.sum, num.sams = ncol(otu.tab), num.otus = nrow(otu.tab)))
 }
@@ -414,7 +472,7 @@ mean.prop.func <- function(biom) {
     prop.otu.tab[,i] <- otu.tab[,i]/lib.size[i]
   }
   mean.prop <- rowMeans(prop.otu.tab)
-  mean.prop.sum <- c(mean(mean.prop, na.rm = T), quantile(mean.prop, na.rm = T))
+  mean.prop.sum <- c(mean(mean.prop), quantile(mean.prop))
   names(mean.prop.sum) <- c("Mean", "Minimum", "1st quartile", "Median", "3rd quartile", "Maximum")
   return(list(mean.prop = mean.prop, mean.prop.sum = mean.prop.sum, num.sams = ncol(otu.tab), num.otus = nrow(otu.tab)))
 }
