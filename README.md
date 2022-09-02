@@ -6,7 +6,7 @@ Version: 1.0.0
 
 Date: 2022-08-22
 
-Maintainer: Won Gu <wpg5129@psu.edu>
+Maintainer: Won Gu <wpg5129@psu.edu> Hyojung Jang <hyojung.jang@stonybrook.edu> 
 
 Description: MiCloud-S is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses. MiCloud-S consists of a data processing module and following four data analytic modules as follows.
 
@@ -47,4 +47,4 @@ runGitHub("MiCloudSGit", "wg99526", ref = "main")
 
 # Troubleshooting Tips
 
-If you have any problems for using MiCloud-S, please report in Issues (https://github.com/wg99526/MiCloudSGit/issues) or email Won Gu (wpg5129@psu.edu).
+If you have any problems for using MiCloud-S, please report in Issues (https://github.com/wg99526/MiCloudSGit/issues) or email Won Gu (wpg5129@psu.edu) or Hyojung Jang (hyojung.jang@stonybrook.edu). 
