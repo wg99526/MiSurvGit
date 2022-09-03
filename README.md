@@ -28,7 +28,7 @@ Description: MiCloud-S is an integrative web cloud platform for processing, anal
  
 ## References
 
-* Gu W, Koh H, Jang HJ. Lee B, Kang, B. MiCloud-S: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (*_Submitted_*)
+* Gu W, Koh H, Jang HJ, Lee B, Kang, B. MiCloud-S: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (*_Submitted_*)
 
 # Prerequites
 
