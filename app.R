@@ -3035,11 +3035,12 @@ server = function(input, output, session) {
           err.dat <- list()
           
           for (k in 1:ranks) {
-            if (class(rf.fit.out$rf.fit[[k]]) != "try-error") {
-              imp <- as.matrix(rf.fit.out$rf.fit[[k]]$importance)
-              colnames(imp) <- "Importance"
-              importance[[k]] <- imp
-            }
+            imp <- as.matrix(rf.fit.out$rf.fit[[k]]$importance)
+            colnames(imp) <- "Importance"
+            importance[[k]] <- imp
+            
+              
+            
             if (sum(is.na(chooseData$taxa.names.out$duplicates[[k]])) == 0) {
               duplicate.taxa <- sapply(strsplit(unlist(chooseData$taxa.names.out$duplicates[[k]]), " :"),  "[", 1)
               duplicates[[k]] <- rep(TRUE, length(duplicate.taxa)) #%in% taxon.inplot
