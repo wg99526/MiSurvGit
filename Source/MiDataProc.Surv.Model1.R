@@ -277,8 +277,7 @@ surv.Cox.plot.func <- function( cox.fit, surv.dat, input = NULL) {
   
   fit <- try(survfit(cox.fit, newdata = new_dat),silent = T)
   
-  if(class(fit) != "try-error") {
-    ggsurv <- ggsurvplot( fit,
+  ggsurv <- ggsurvplot( fit,
                           data = surv.dat,
                           pval = FALSE, conf.int = TRUE,
                           linetype = c(1,2),
@@ -314,11 +313,6 @@ surv.Cox.plot.func <- function( cox.fit, surv.dat, input = NULL) {
                           label = output1, size = 4)
     }
     return( ggsurv  )
-  } else {
-    plot.new()
-    text(x = 0.5, y = 0.5, "Cox model did not fit the data.", 
-         cex = 1.2, col = "black")
-  }
 }
 
 
