@@ -196,9 +196,9 @@ surv.en.reg.fit <- function(taxa.out, surv.dat, taxa.names.rank.out, rank, n.fol
               cv.tab = cv.tab, cv.kcv = cv.kcv[[ind.min.mse]], lasso.kcv = lasso.kcv))
 }
 
+
 lasso.en.barplot <- function(out) {
-  if (class(out) != "try-error") {
-    
+
     sig.ord.coef.est <- as.numeric(out$sig.coef.out$Est.)
     #sig.ord.coef.est <- rep(sig.ord.coef.est, rep)
     sig.ord.taxa <- out$sig.coef.out$Taxon
@@ -246,11 +246,8 @@ lasso.en.barplot <- function(out) {
         barplot(height = sig.ord.coef.est.1, space = 0.5, cex.names = 0.6, cex.axis = 0.6, cex.lab = 0.7, col = c(rep("lightblue", length(ind.neg.1)), rep("pink2", length(ind.pos.1))), horiz = TRUE, xlab = "Coefficient", names = sig.ord.taxa.1, las = 2)
       }
     }
-  } else {
-    text(x = 0.5, y = 0.5, "Error : Please try different number of folds.", 
-         cex = 1.2, col = "black")
-  }
 }
+
 
 plot.importance <- function(out, num.display) {
   ind <- order(abs(out$importance), decreasing = TRUE)[1:num.display]
