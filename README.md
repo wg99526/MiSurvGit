@@ -23,7 +23,7 @@ Description: MiCloud-S is an integrative web cloud platform for processing, anal
 
 ## URLs
 
-* Web application (online implementation): https://223.194.200.99:3838
+* Web application (online implementation): http://223.194.200.99:3838
 * GitHub repository (local implementation): https://github.com/wg99526/MiCloudSGit
  
 ## References
