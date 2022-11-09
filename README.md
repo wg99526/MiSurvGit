@@ -4,7 +4,7 @@ Title: MiCloud-S: An Integrative Web Cloud Platform for Microbiome Data Analysis
 
 Version: 1.0.0
 
-Date: 2022-08-22
+Date: 2022-08-23
 
 Maintainer: Won Gu <wpg5129@psu.edu> Hyojung Jang <hyojung.jang@stonybrook.edu> 
 
