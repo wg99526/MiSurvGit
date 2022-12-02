@@ -214,7 +214,7 @@ source("Source/MiDataProc.Surv.Model4.R")
         tabItem(tabName = "home",
                 div(id = "homepage", br(), HOME_COMMENT, 
                     p(" ", style = "margin-bottom: 10px;"),
-                    div(tags$img(src='MiCloud-S_workflow.png', height = 756, width = 1344), style="text-align: center;"),
+                    div(tags$img(src='MiSurv_workflow.png', height = 756, width = 1344), style="text-align: center;"),
                     br(),
                     tags$ul(
                       tags$li(HOME_COMMENT1), tags$li(HOME_COMMENT2), tags$li(HOME_COMMENT3), tags$li(HOME_COMMENT4), tags$li(HOME_COMMENT5),
