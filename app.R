@@ -50,9 +50,9 @@ source("Source/MiDataProc.Surv.Model4.R")
 
 # COMMENTS
 {
-  TITLE = p("MiCloud-S: An Integrative Web Cloud Platform for Microbiome Data Analysis with Survival Responses", style = "font-size:18pt")
-  HOME_COMMENT = p(strong("MiCloud-S", style = "font-size:15pt"), "is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses.
-                  MiCloud-S consists of a data processing module and following four data analytic modules: 1) Module 1: Comparative survival analysis between treatment groups, 
+  TITLE = p("MiSurv: An Integrative Web Cloud Platform for Microbiome Data Analysis with Survival Responses", style = "font-size:18pt")
+  HOME_COMMENT = p(strong("MiSurv", style = "font-size:15pt"), "is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses.
+                  MiSurv consists of a data processing module and following four data analytic modules: 1) Module 1: Comparative survival analysis between treatment groups, 
                   2) Module 2: Comparative analysis in microbial composition between treatment groups, 
                   3) Module 3: Association testing between microbial composition and survival responses, 
                   4) Module 4: Prediction modeling using microbial taxa on survival responses. 
@@ -65,7 +65,7 @@ source("Source/MiDataProc.Surv.Model4.R")
   HOME_COMMENT4 = p(strong("Module 3 : "), "Association testing between microbial composition and survival responses with or without covariate adjustment.", style = "font-size:13pt")
   HOME_COMMENT3 = p(strong("Module 2 : "), "Comparative analysis in microbial composition between treatment groups, not involving survival data, with or without covariate adjustment.", style = "font-size:13pt")
   HOME_COMMENT5 = p(strong("Module 4 : "), "Prediction modeling using microbial taxa at different taxonomic ranks on survival responses.", style = "font-size:13pt")
-  HOME_COMMENT6 = p("Reference: Gu W, Koh H, Jang HJ, Lee B, Kang B. MiCloud-S: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (submitted)", style = "font-size:13pt")
+  HOME_COMMENT6 = p("Reference: Gu W, Koh H, Jang HJ, Lee B, Kang B. MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (submitted)", style = "font-size:13pt")
   
   INPUT_PHYLOSEQ_COMMENT1 = p("Description:", br(), br(), "This should be an '.Rdata' or '.rds' file, and the data should be in 'phyloseq' format (see ", 
                               a(tags$u("https://bioconductor.org/packages/release/bioc/html/phyloseq.html"), style = "color:red3"),
@@ -80,11 +80,11 @@ source("Source/MiDataProc.Surv.Model4.R")
                               "3) The metadata/sample information should contain variables for the subjects about host phenotypes, medical interventions, 
                               disease status or environmental/behavioral factors, where rows are subjects and columns are variables 
                               (row names are subject IDs, and column names are variable names).", br(), 
-                              "4) The phylogenetic tree should be a rooted tree. Otherwise, MiCloud-S automatically roots the tree through midpoint rooting (phangorn::midpoint). 
+                              "4) The phylogenetic tree should be a rooted tree. Otherwise, MiSurv automatically roots the tree through midpoint rooting (phangorn::midpoint). 
                               The tip labels of the phylogenetic tree are feature IDs.", br(), br(), 
                               "* The features should be matched and identical across feature table, taxonomic table and phylogenetic tree. 
                               The subjects should be matched and identical between feature table and metadata/sample information. 
-                              MiCloud-S will analyze only the matched features and subjects."
+                              MiSurv will analyze only the matched features and subjects."
                               , style = "font-size:11pt")
   INPUT_PHYLOSEQ_COMMENT2 = p("You can download example microbiome data 'biom.Rdata' in 'phyloseq' format. The name of the 
                               phyloseq object should be 'biom'. For more details about 'phyloseq', see ", 
@@ -114,11 +114,11 @@ source("Source/MiDataProc.Surv.Model4.R")
                                     "3) The metadata/sample information (.txt or .csv) should contain variables for the subjects about host phenotypes, medical interventions, 
                                     disease status or environmental/behavioral factors, where rows are subjects and columns are variables (row names are subject IDs, and 
                                     column names are variable names).", br(), 
-                                    "4) The phylogenetic tree (.tre or .nwk) should be a rooted tree. Otherwise, MiCloud-S automatically roots the tree through midpoint 
+                                    "4) The phylogenetic tree (.tre or .nwk) should be a rooted tree. Otherwise, MiSurv automatically roots the tree through midpoint 
                                     rooting (phangorn::midpoint). The tip labels of the phylogenetic tree are feature IDs.", br(), br(), 
                                     "* The features should be matched and identical across feature table, taxonomic table and phylogenetic tree. 
                                     The subjects should be matched and identical between feature table and metadata/sample information. 
-                                    MiCloud-S will analyze only the matched features and subjects.", style = "font-size:11pt")
+                                    MiSurv will analyze only the matched features and subjects.", style = "font-size:11pt")
   INPUT_INDIVIDUAL_DATA_COMMENT2 = p("You can download example microbiome data 'biom.zip'. This zip file contains four necessary data, feature table (otu.tab.txt), 
                                      taxonomic table (tax.tab.txt), metadata/sample information (sam.dat.txt), and phylogenetic tree (tree.tre).", br(), br(),
                                      "> setwd('/yourdatadirectory/')", br(), br(), 
@@ -181,7 +181,7 @@ source("Source/MiDataProc.Surv.Model4.R")
 # UI
 {
   ui = dashboardPage(
-    title = "MiCloud-S",
+    title = "MiSurv",
     dashboardHeader(title = span(TITLE, style = "float:left;font-size: 20px"), titleWidth = "100%"),
     dashboardSidebar(
       tags$script(JS("document.getElementsByClassName('sidebar-toggle')[0].style.visibility = 'hidden';")),
@@ -1141,7 +1141,7 @@ server = function(input, output, session) {
         output$morePrim_Surv <- renderUI({
           tagList(
             h4(strong("Rename Categories?", style = "color:black")),
-            p("You can rename the categories of treatment variable. MiCloud-S keeps up to 8 characters on graphs.", style = "font-size:11pt"),
+            p("You can rename the categories of treatment variable. MiSurv keeps up to 8 characters on graphs.", style = "font-size:11pt"),
             textInput("prim.var.rename1.Surv", label = (paste0("Reference: ",Surv.bin.cat.ref.ori.out[1])), value = Surv.bin.cat.ref.ori.out[1], width = '80%'),
             textInput("prim.var.rename2.Surv", label = (paste0("Comparison: ",Surv.bin.cat.ref.ori.out[2])), value = Surv.bin.cat.ref.ori.out[2], width = '80%'))
         })
@@ -1524,7 +1524,7 @@ server = function(input, output, session) {
           output$morePrimvar_opt <- renderUI({
             tagList(
               h4(strong("Rename Categories?", style = "color:black")),
-              p("You can rename the categories of primary variable. MiCloud-S keeps up to 8 characters on graphs.", style = "font-size:11pt"), 
+              p("You can rename the categories of primary variable. MiSurv keeps up to 8 characters on graphs.", style = "font-size:11pt"), 
               textInput("alphaCat1", label = (paste0("Reference: ",alpha.categos$cat1)), value = alpha.categos$cat1, width = '80%'),
               textInput("alphaCat2", label = (paste0("Comparison: ",alpha.categos$cat2)), value = alpha.categos$cat2, width = '80%'))
           })
@@ -1645,7 +1645,7 @@ server = function(input, output, session) {
           output$beta_morePrimvar_optcross <- renderUI({
             tagList(
               h4(strong("Rename Categories?", style = "color:black")),
-              p("You can rename the categories of primary variable. MiCloud-S keeps up to 8 characters on graphs.", style = "font-size:11pt"), 
+              p("You can rename the categories of primary variable. MiSurv keeps up to 8 characters on graphs.", style = "font-size:11pt"), 
               textInput("betaCat1", label = (paste0("Reference: ",beta.categos$cat1)), value = beta.categos$cat1, width = '80%'),
               textInput("betaCat2", label = (paste0("Comparison: ",beta.categos$cat2)), value = beta.categos$cat2, width = '80%'))
           }) 
@@ -1744,7 +1744,7 @@ server = function(input, output, session) {
           output$morePrimvar_opt_taxa <- renderUI({
             tagList(
               h4(strong("Rename Categories?", style = "color:black")), 
-              p("You can rename the categories of primary variable. MiCloud-S keeps up to 8 characters on graphs.", style = "font-size:11pt"),
+              p("You can rename the categories of primary variable. MiSurv keeps up to 8 characters on graphs.", style = "font-size:11pt"),
               textInput("taxaCat1", label = (paste0("Reference: ",taxa.categos$cat1)), value = taxa.categos$cat1, width = '80%'),
               textInput("taxaCat2", label = (paste0("Comparison: ",taxa.categos$cat2)), value = taxa.categos$cat2, width = '80%'))
           }) 
