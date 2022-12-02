@@ -1,6 +1,6 @@
-# MiCloud-Sjhjhk
+# MiSurv
 
-Title: MiCloud-S: An Integrative Web Cloud Platform for Microbiome Data Analysis with Survival Responses
+Title: MiSurv: An Integrative Web Cloud Platform for Microbiome Data Analysis with Survival Responses
 
 Version: 1.0.0
 
@@ -8,7 +8,7 @@ Date: 2022-08-23
 
 Maintainer: Won Gu <wpg5129@psu.edu> Hyojung Jang <hyojung.jang@stonybrook.edu> 
 
-Description: MiCloud-S is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses. MiCloud-S consists of a data processing module and following four data analytic modules as follows.
+Description: MiSurv is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses. MiSurv consists of a data processing module and following four data analytic modules as follows.
 
 * **Data Processing** : Interactive procedures for 1) data inputs (.rdata, .rds, .biom, .txt, .csv, .tsv, .tre), 2) survival data and analytic plans (survival time, censored/event, follow-up period, subgroup analysis), 3) quality controls (kingdom, library size, mean proportion, taxonomic name), and 4) data transformations (alpha- and beta-diversity calculation, rarefaction, proportion, centered log-ratio, arcsine square root).
 
