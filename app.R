@@ -538,7 +538,7 @@ server = function(input, output, session) {
   options(shiny.maxRequestSize=30*1024^2)
   ## load example data ####
   env <- new.env()
-  nm <- load(file = "Data/MiCloud_S_Ex.Rdata", env)[1]
+  nm <- load(file = "Data/MiSurv_Ex.Rdata", env)[1]
   biom <- env[[nm]]
   
   ori.biom <- biom
