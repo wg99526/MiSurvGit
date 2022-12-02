@@ -24,11 +24,11 @@ Description: MiSurv is an integrative web cloud platform for processing, analyzi
 ## URLs
 
 * Web application (online implementation): http://223.194.200.99:3838
-* GitHub repository (local implementation): https://github.com/wg99526/MiCloudSGit
+* GitHub repository (local implementation): https://github.com/wg99526/MiSurv
  
 ## References
 
-* Gu W, Koh H, Jang HJ, Lee B, Kang, B. MiCloud-S: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (*_Submitted_*)
+* Gu W, Koh H, Jang HJ, Lee B, Kang, B. MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (*_Submitted_*)
 
 # Prerequites
 
@@ -42,9 +42,9 @@ install.packages("shiny")
 ```
 library(shiny)
 
-runGitHub("MiCloudSGit", "wg99526", ref = "main")
+runGitHub("MiSurvGit", "wg99526", ref = "main")
 ```
 
 # Troubleshooting Tips
 
-If you have any problems for using MiCloud-S, please report in Issues (https://github.com/wg99526/MiCloudSGit/issues) or email Won Gu (wpg5129@psu.edu) or Hyojung Jang (hyojung.jang@stonybrook.edu). 
+If you have any problems for using MiSurv, please report in Issues (https://github.com/wg99526/MiSurv/issues) or email Won Gu (wpg5129@psu.edu) or Hyojung Jang (hyojung.jang@stonybrook.edu). 
