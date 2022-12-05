@@ -23,7 +23,7 @@ Description: MiSurv is an integrative web cloud platform for processing, analyzi
 
 ## URLs
 
-* Web application (online implementation): http://223.194.200.99:3838
+* Web application (online implementation): http://223.194.200.99
 * GitHub repository (local implementation): https://github.com/wg99526/MiSurv
  
 ## References
