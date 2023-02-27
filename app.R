@@ -100,7 +100,7 @@ source("Source/MiDataProc.Surv.Model4.R")
                               " > tree <- phy_tree(biom)", br(), 
                               " > sam.dat <- sample_data(biom)", br(), br(), 
                               " > sam.dat$T1Dweek",   HTML('&emsp;'),HTML('&nbsp;'),   "# Survival Time", br(), 
-                              " > sam.dat$T1D ", HTML('&emsp;'),HTML('&emsp;'),HTML('&emsp;'),  cat(" ", "# Event"), br(), 
+                              " > sam.dat$T1D ", HTML('&emsp;'),HTML('&emsp;'),HTML('&emsp;'), HTML('&emsp;'), "# Event", br(), 
                               " > sam.dat$Antibiotics ", HTML('&emsp;'),  "# Treatment", br(), br(),
                               "You can check if the features are matched and identical across feature table, taxonomic table and 
                               phylogenetic tree, and the subjects are matched and identical between feature table and metadata/sample information 
