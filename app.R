@@ -51,26 +51,24 @@ source("Source/MiDataProc.Surv.Model4.R")
 # COMMENTS
 {
   TITLE = p("MiSurv: An Integrative Web Cloud Platform for Microbiome Data Analysis with Survival Responses", style = "font-size:18pt")
-  HOME_COMMENT = p(strong("MiSurv", style = "font-size:15pt"), "is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses.
-                  MiSurv consists of a data processing module and following four data analytic modules: 1) Module 1: Comparative survival analysis between treatment groups, 
-                  2) Module 2: Comparative analysis in microbial composition between treatment groups, 
-                  3) Module 3: Association testing between microbial composition and survival responses, 
-                  4) Module 4: Prediction modeling using microbial taxa on survival responses. 
-                  More details are as follows.", style = "font-size:13pt")
-  HOME_COMMENT1 = p(strong("Data Processing : "), "Interactive procedures for 1) data inputs (.rdata, .rds, .biom, .txt, .csv, .tsv, .tre),
-                   2) survival data and analytic plans (survival time, censored/event, follow-up period, subgroup analysis),
-                   3) quality controls (kingdom, library size, mean proportion, taxonomic name), and
-                   4) data transformations (alpha- and beta-diversity calculation, rarefaction, proportion, centered log-ratio, arcsine square root).", style = "font-size:13pt")
-  HOME_COMMENT2 = p(strong("Module 1 : "), "Comparative survival analysis between treatment groups, not involving microbiome data, with or without covariate adjustment.", style = "font-size:13pt")
-  HOME_COMMENT4 = p(strong("Module 3 : "), "Association testing between microbial composition and survival responses with or without covariate adjustment.", style = "font-size:13pt")
-  HOME_COMMENT3 = p(strong("Module 2 : "), "Comparative analysis in microbial composition between treatment groups, not involving survival data, with or without covariate adjustment.", style = "font-size:13pt")
-  HOME_COMMENT5 = p(strong("Module 4 : "), "Prediction modeling using microbial taxa at different taxonomic ranks on survival responses.", style = "font-size:13pt")
-  HOME_COMMENT6 = p("Reference: Gu W, Koh H, Jang HJ, Lee B, Kang B. MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (submitted)", style = "font-size:13pt")
+  HOME_COMMENT = p(strong("MiSurv", style = "font-size:15pt"), "is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses. MiSurv consists of a data processing module and its following four data analytic modules: (1) Module 1: Comparative survival analysis between treatment groups, (2) Module 2: Comparative analysis in microbial composition between treatment groups, (3) Module 3: Association testing between microbial composition and survival responses, (4) Module 4: Prediction modeling using microbial taxa on survival responses. More details are as follows.", style = "font-size:13pt")
   
-  INPUT_PHYLOSEQ_COMMENT1 = p("Description:", br(), br(), "This should be an '.Rdata' or '.rds' file, and the data should be in 'phyloseq' format (see ", 
-                              a(tags$u("https://bioconductor.org/packages/release/bioc/html/phyloseq.html"), style = "color:red3"),
-                              "). The phyloseq object should contain all the four necessary data, feature (OTU or ASV) table, taxonomic table, 
-                              metadata/sample information, and phylogenetic tree.", 
+  HOME_COMMENT1 = p(strong("Data Processing : "), "Interactive procedures for (1) data inputs (.rdata, .rds, .biom, .txt, .csv, .tsv, .tre), (2) survival data and analytic plans (survival time, censored/event, follow-up period, subgroup analysis), (3) quality controls (kingdom, library size, mean proportion, taxonomic name), and (4) data transformations (alpha- and beta-diversity calculation, rarefaction, proportion, centered log-ratio, arcsine square root).", style = "font-size:13pt")
+  HOME_COMMENT2 = p(strong("Module 1:"), "Comparative survival analysis between treatment groups, not involving microbiome data, with or without covariate adjustment(s). ", style = "font-size:13pt")
+  HOME_COMMENT4 = p(strong("Module 3:"), "Association testing between microbial composition and survival responses with or without covariate adjustment(s).", style = "font-size:13pt")
+  HOME_COMMENT3 = p(strong("Module 2:"), "Comparative analysis in microbial composition between treatment groups, not involving survival data, with or without covariate adjustment(s).", style = "font-size:13pt")
+  HOME_COMMENT5 = p(strong("Module 4:"), "Prediction modeling using microbial taxa at different taxonomic ranks on survival responses", style = "font-size:13pt")
+  
+  HOME_COMMENT6 = p(strong("URLs:"), " Web server (online implementation):", tags$a(href = "http://misurv.micloud.kr", "http://misurv.micloud.kr"), 
+                    "; GitHub repository (local implementation):", 
+                    tags$a(href = "https://github.com/wg99526/misurvgit", "https://github.com/wg99526/misurvgit"), style = "font-size:13pt")
+  HOME_COMMENT7 = p(strong("Maintainers:"), " Won Gu (", tags$a(href = "wpg5129@psu.edu", "wpg5129@psu.edu"), 
+                    "); Hyojung Jang (", tags$a(href = "hyojung.jang@stonybrook.edu", "hyojung.jang@stonybrook.edu"), ")", style = "font-size:13pt")
+  HOME_COMMENT8 = p(strong("Reference:"), "Gu W, Koh H, Jang HJ, Lee B, Kang B. MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (in review)", style = "font-size:13pt")
+  
+  
+  
+  INPUT_PHYLOSEQ_COMMENT1 = p("Description:", br(), br(), "This should be an '.Rdata' or '.rds' file, and the data should be in the 'phyloseq' format (see", tags$a(href = "https://bioconductor.org/packages/release/bioc/html/phyloseq.html", "https://bioconductor.org/packages/release/bioc/html/phyloseq.html"), ") The phyloseq object should contain all the four necessary data, feature (OTU or ASV) table, taxonomic table, metadata/sample information, and phylogenetic tree.", 
                               br(), br(), "Details:", br(), br(), 
                               "1) The feature table should contain counts, where rows are features (OTUs or ASVs) and columns are subjects 
                               (row names are feature IDs and column names are subject IDs).", br(),
@@ -86,9 +84,14 @@ source("Source/MiDataProc.Surv.Model4.R")
                               The subjects should be matched and identical between feature table and metadata/sample information. 
                               MiSurv will analyze only the matched features and subjects."
                               , style = "font-size:11pt")
-  INPUT_PHYLOSEQ_COMMENT2 = p("You can download example microbiome data 'biom.Rdata' in 'phyloseq' format. The name of the 
-                              phyloseq object should be 'biom'. For more details about 'phyloseq', see ", 
-                              a(tags$u("https://bioconductor.org/packages/release/bioc/html/phyloseq.html"), style = "color:red3"), br(), br(), 
+  
+  INPUT_PHYLOSEQ_COMMENT2 = p("You can download example microbiome data 'biom.Rdata' in the 'phyloseq' format.", br(), 
+  "For more details about 'phyloseq', see", 
+                              tags$a(href = "https://bioconductor.org/packages/release/bioc/html/phyloseq.html", "https://bioconductor.org/packages/release/bioc/html/phyloseq.html"),
+                              br(),
+  p(strong("Data description:"), "This example data are the public gut microbiome data (Zhang et al. 2018) we used in our real data applications (Gu et al., in review). The raw sequence data are deposited in QIITA (", tags$a(href = "https://qiita.ucsd.edu", "https://qiita.ucsd.edu"), ") with the ID number 10508 (", tags$a(href = "https://qiita.ucsd.edu/study/description/10508", "https://qiita.ucsd.edu/study/description/10508"), "). More detailed sample extraction and raw sequence data processing procedures are described in (Zhang et al. 2018; Gu et al., in review). "), 
+  
+  br(), 
                               "> setwd('/yourdatadirectory/')", br(), br(), 
                               "> load(file = 'biom.Rdata')", br(), br(), 
                               "> library(phyloseq)", br(), br(), 
@@ -214,17 +217,16 @@ source("Source/MiDataProc.Surv.Model4.R")
         tabItem(tabName = "home",
                 div(id = "homepage", br(), HOME_COMMENT, 
                     p(" ", style = "margin-bottom: 10px;"),
-                    div(tags$img(src='MiSurv_workflow.png', height = 756, width = 1344), style="text-align: center;"),
+                    div(tags$img(src='MiSurv_workflow.png', height = 656, width = 1200), style="text-align: center;"),
                     br(),
                     tags$ul(
                       tags$li(HOME_COMMENT1), tags$li(HOME_COMMENT2), tags$li(HOME_COMMENT3), tags$li(HOME_COMMENT4), tags$li(HOME_COMMENT5),
                       style = "font-size:13pt"),
                     br(),
                     HOME_COMMENT6,
-                    br(),
-                    selectInput("selectTheme", strong("Select Theme", style = "font-size:14pt"), 
-                                c("Choose one" = "", "Flat Red", "Gray Dark", "Gray Light",
-                                  "Onenote", "Poor Mans Flatly (Default)", "Purple Gradient"))
+                    HOME_COMMENT7,
+                    HOME_COMMENT8,
+                    br()
                 )),
         
         ##### DATA INPUT ####
@@ -363,7 +365,8 @@ source("Source/MiDataProc.Surv.Model4.R")
                                     DATA_TRANSFORM_COMMENT,
                                     actionButton("divCalcRun", (strong("Run!")), class = "btn-info"), 
                                     p(" ", style = "margin-bottom: +10px;"),
-                                    p("Once you changed any setting in the preceding Data Input or Quality Control, you have to click this Run button again to use any of the following data analytic modules.")),
+                                    p(strong("Attention:"), "Once you changed any setting in the preceding Data Input or Quality Control, you have to click this Run button again to use any of the following data analytic modules."),
+                                    ),
                                 uiOutput("divCalcDownload")),
                          column(width = 6, style='padding-left:0px',
                                 box(title = strong("References"), width = NULL, status = "primary", solidHeader = TRUE,
@@ -662,8 +665,14 @@ server = function(input, output, session) {
                        }"
             ),
             fileInput("phyloseqData", strong("Please upload your 'phyloseq' data (.Rdata, .rds)", style = "color:black"), 
-                      accept = c(".Rdata", ".rds"), width = '80%'), div(style = "margin-top: -15px"),
-            actionButton('Load_Phyloseq_Data', 'Upload', class = "btn-info"), br(),br(),
+                      accept = c(".Rdata", ".rds"), width = '80%'), div(style = "margin-top: -18px"),
+            
+            actionButton('Load_Phyloseq_Data', 'Upload', class = "btn-info"),
+            br(),
+            p(" ", style = "margin-top: 5px;"),
+            p(strong("Attention: ", style = "color:black"), "You have to click this Upload button to perform following data processing and downstream data analyses."), 
+            
+            br(), 
             shinyjs::hidden(
               shiny::div(id = "phyloseqUpload_error",
                          shiny::tags$p("Please upload a Rdata file!!",
@@ -686,7 +695,8 @@ server = function(input, output, session) {
         output$ref_micloud <- renderUI({
           tagList(
             box(title = strong("Reference"), width = NULL, status = "primary", solidHeader = TRUE, 
-                p("Gu W, Moon J, Chisina C, Kang B, Park T, Koh H. MiCloud: A unified web platform for comprehensive microbiome data analysis. PLoS One 2022:17(8): e0272354.")
+                p("Zhang XS, Li J, Krautkramer KA, Badri M, Battaglia T, Borbet TC et al. Antibiotic-induced acceleration of type 1 diabetes alters maturation of innate intestinal immunity. eLife 2018:7:e37816."), 
+                p("Gu W, Koh H, Jang HJ, Lee B, Kang B. MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (in review)")
             )
           )
         })
@@ -2351,7 +2361,6 @@ server = function(input, output, session) {
       }
     )
     
-    
     shinyjs::disable("runbtn_CoxA")
     # shinyjs::disable("chooseAdjustment")
     # shinyjs::disable("primvar")
@@ -2375,7 +2384,6 @@ server = function(input, output, session) {
         ##############################################
         incProgress(5/10, message = "Plotting")
         
-        # Data Preparation
         new_data <- data.union.func(chooseData$sam.dat, chooseData$alpha.div)
         
         new_sam.dat   <- new_data$new_sam.dat
@@ -2484,6 +2492,7 @@ server = function(input, output, session) {
   ## Beta Cox Proportion Hazard Analysis ##
   ##########################################
   observeEvent(input$runbtn_CoxB, {
+    print("hello come")
     validate(
       if (input$covariatesCoxB == "Covariate(s)" & is.null(input$covariatesOptionsCoxB)) {
         showNotification("Error: Please select covariate(s) before you click 'Run!' button.",
@@ -2521,7 +2530,7 @@ server = function(input, output, session) {
         ds.Ks.res <- ds.Ks$res
         ds.Ks.res <- beta_no_miss_cov(beta.sam_dat.bin, ds.Ks.res, input$covariatesOptionsCoxB)
         
-        if (input$subgroup.b== "Yes"){
+        if (input$subgroup.b == "Yes"){
           ind.sub <- beta.sam_dat.bin [[input$subgroup.sel.b]] == input$pick_subgroup.b
           beta.sam_dat.bin  <- beta.sam_dat.bin [ind.sub, ]
         }
