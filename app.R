@@ -13,7 +13,6 @@ if(length(new.packages)) install.packages(new.packages)
 if(!require('phyloseq')) remotes::install_github('joey711/phyloseq')
 if(!require('biomformat')) remotes::install_github('joey711/biomformat')
 
-
 library(seqinr)
 library(shiny)
 library(shinydashboard)
@@ -3259,39 +3258,212 @@ server = function(input, output, session) {
         taxa_dataBinvar <- taxa.results$bin.var
         taxa_dataTaxa <- taxa.results$taxa
         
-        if (input$chooseMethod_taxa == "Welch t-test" | input$chooseMethod_taxa == "Wilcoxon rank-sum test (default)") {
-          if (input$chooseMethod_taxa == "Welch t-test") {
-            incProgress(5/10, message = "Welch t-test")
-            taxa.t.test.out <- taxa.bin.t.test.united(taxa.results$bin.var, taxa.results$taxa)
-            taxa.t.test.q.out <- bin.q.united.func(taxa.t.test.out, method = "BH")
+        if (input$chooseMethod_taxa == "Welch t-test") {
+          incProgress(5/10, message = "Welch t-test")
+          taxa.t.test.out <- taxa.bin.t.test.united(taxa.results$bin.var, taxa.results$taxa)
+          taxa.t.test.q.out <- bin.q.united.func(taxa.t.test.out, method = "BH")
+          
+          taxa.outputs$DAoutput = taxa.t.test.q.out
+          
+          num_box = numeric()
+          for (r in 1:6) {
+            row.num <- ceiling(sum(taxa.t.test.q.out[[r]]$Q.value < 0.05)/4)
+            if (row.num > 0) {
+              num_box[r] <- row.num
+            } else {
+              num_box[r] <- 1
+            } 
+          }
+          
+          incProgress(3/10, message = "Displaying Results in progress")
+          
+          dend_result <- taxa.sig.dend(taxa.outputs$DAoutput, chooseData$NAadded$tax.tab, "twopi", include)
+          flow.text <- dend_result$flow.text
+          taxon.tab <- dend_result$taxon.tab
+          ci.tab.all <- dend_result$ci.tab.all
+          
+          if ( include == FALSE){
+            taxon.tab <- taxon.tab[!grepl("s_", taxon.tab$Taxon, fixed = TRUE), ]
+          }
+          
+          if ( length(ci.tab.all) > 1 ){
             
-            taxa.outputs$DAoutput = taxa.t.test.q.out
-            
-            nrow = numeric()
-            for (r in 1:6) {
-              row.num <- ceiling(sum(taxa.t.test.q.out[[r]]$Q.value < 0.05)/4)
-              if (row.num > 0) {
-                nrow[r] <- row.num
-              } else {
-                nrow[r] <- 1
-              } 
-            }
-          } else if (input$chooseMethod_taxa == "Wilcoxon rank-sum test (default)") {
-            incProgress(5/10, message = "Wilcoxon rank-sum test")
-            taxa.wilcox.test.out <- taxa.bin.wilcox.test.united(taxa.results$bin.var, taxa.results$taxa)
-            taxa.wilcox.test.q.out <- bin.q.united.func(taxa.wilcox.test.out, method = "BH")
-            taxa.wilcox.test.est.added <- taxa.wilcox.test.est.func(taxa.results$bin.var, taxa.results$taxa, rename.cats_ref, rename.cats_com, taxa.wilcox.test.q.out)
-            
-            taxa.outputs$DAoutput = taxa.wilcox.test.est.added
-            
-            nrow = numeric()
-            for (r in 1:6) {
-              row.num <- ceiling(sum(taxa.outputs$DAoutput[[r]]$Q.value < 0.05)/4)
-              if (row.num > 0) {
-                nrow[r] <- row.num
-              } else {
-                nrow[r] <- 1
+            for( i in 1:nrow(taxon.tab)){
+              if (ci.tab.all[-1][i] < 0){
+                taxon.tab[i,1] <- cell_spec(taxon.tab[i,1], "html", color = "blue")
+                taxon.tab[i,2] <- cell_spec(taxon.tab[i,2], "html", color = "black")
               }
+              else{
+                taxon.tab[i,1] <- cell_spec(taxon.tab[i,1], "html", color = "red")
+                taxon.tab[i,2] <- cell_spec(taxon.tab[i,2], "html", color = "black")
+              }
+              
+            }
+          }
+          
+          N <- dim(taxon.tab)[1]
+          itr <- ceiling(N/5)
+          tab.one   <- data.frame( matrix(ncol=2,nrow=0) )
+          tab.two   <- data.frame( matrix(ncol=2,nrow=0) )
+          tab.three <- data.frame( matrix(ncol=2,nrow=0) )
+          tab.four  <- data.frame( matrix(ncol=2,nrow=0) )
+          tab.five  <- data.frame( matrix(ncol=2,nrow=0) )
+          
+          colnames(tab.one) <- c("ID", "Taxon")
+          colnames(tab.two) <- c("ID", "Taxon")
+          colnames(tab.three) <- c("ID", "Taxon")
+          colnames(tab.four) <- c("ID", "Taxon")
+          colnames(tab.five) <- c("ID", "Taxon")
+          
+          if ( dim(taxon.tab)[1] > 0 ) {
+            
+            i = 1
+            j = 1
+            N.rmd <- N %% 5
+            N.fix <- N + 5 - N.rmd
+            while ( i <= itr) {
+              tab.one  [i,] <- taxon.tab[j,]
+              tab.two  [i,] <- taxon.tab[j+1,]
+              tab.three[i,] <- taxon.tab[j+2,]
+              tab.four [i,] <- taxon.tab[j+3,]
+              tab.five [i,] <- taxon.tab[j+4,]
+              i <- i + 1  
+              j <- j + 5
+            }
+            row.names(tab.one) <- NULL
+            row.names(tab.two) <- NULL
+            row.names(tab.three) <- NULL
+            row.names(tab.four) <- NULL
+            row.names(tab.five) <- NULL
+            
+            tab.one <- na.omit(tab.one)
+            tab.two <- na.omit(tab.two)
+            tab.three <- na.omit(tab.three)
+            tab.four <- na.omit(tab.four)
+            tab.five <- na.omit(tab.five)
+          }
+          
+          
+          output$vis_rank = renderUI({
+            
+            box(title = strong("Dendrogram"), width = NULL, solidHeader = TRUE, status = "primary", 
+                
+                fluidRow(width = 600, align = "center", 
+                         div(style = "display: inline-block:vertical-align:top;", grVizOutput("first_taxa_dend", width = "98%", height = 1000))),
+                br(),
+                
+                fluidRow(width = NULL, align = "center",
+                         tagList(
+                           div(style="display: inline-block;vertical-align:top;", htmlOutput("hmm_T1") ),
+                           div(style="display: inline-block;vertical-align:top;", htmlOutput("hmm_T2") ),
+                           div(style="display: inline-block;vertical-align:top;", htmlOutput("hmm_T3") ),
+                           div(style="display: inline-block;vertical-align:top;", htmlOutput("hmm_T4") ),
+                           div(style="display: inline-block;vertical-align:top;", htmlOutput("hmm_T5") )
+                         )
+                )
+            )
+          })
+          
+          output$first_taxa_dend= renderGrViz({
+            taxa.sig.dend(taxa.outputs$DAoutput, chooseData$NAadded$tax.tab, "twopi", include)$flow.text
+          })
+          
+          output$hmm_T1 <- renderText({
+            sig.tab1 <- kable(tab.one, 'html', booktabs =TRUE, escape = FALSE) %>%
+              kable_styling(latex_options = c('hold_position'))
+            sig.tab1
+          })
+          output$hmm_T2 <- renderText({
+            
+            sig.tab2 <- kable(tab.two, 'html', booktabs =TRUE, escape = FALSE) %>%
+              kable_styling(latex_options = c('hold_position'))
+            sig.tab2
+          })
+          output$hmm_T3 <- renderText({
+            
+            sig.tab3 <- kable(tab.three, 'html', booktabs =TRUE, escape = FALSE) %>%
+              kable_styling(latex_options = c('hold_position'))
+            sig.tab3
+          })
+          output$hmm_T4 <- renderText({
+            
+            sig.tab4 <- kable(tab.four, 'html', booktabs =TRUE, escape = FALSE) %>%
+              kable_styling(latex_options = c('hold_position'))
+            sig.tab4
+          })
+          output$hmm_T5 <- renderText({
+            
+            sig.tab5 <- kable(tab.five, 'html', booktabs =TRUE, escape = FALSE) %>%
+              kable_styling(latex_options = c('hold_position'))
+            sig.tab5
+          })
+          
+          
+          output$taxa_display_results_hmm= renderUI({
+            tagList(
+              tabBox(title = strong("Box Plot", style = "color:black"), width = NULL,
+                     tabPanel("Phylum", align = "center",
+                              plotOutput("rank1", height = num_box[1]*250, width = 750),
+                     )
+                     ,
+                     tabPanel("Class", align = "center",
+                              plotOutput("rank2", height = num_box[2]*250, width = 750),
+                     )
+                     ,tabPanel("Order", align = "center",
+                               plotOutput("rank3", height = num_box[3]*250, width = 750),
+                     )
+                     ,tabPanel("Family", align = "center",
+                               plotOutput("rank4", height = num_box[4]*250, width = 750),
+                     )
+                     ,tabPanel("Genus", align = "center",
+                               plotOutput("rank5", height = num_box[5]*250, width = 750),
+                     )
+                     ,tabPanel("Species", align = "center",
+                               plotOutput("rank6", height = num_box[6]*250, width = 750),
+                     )
+              )
+            )
+          })
+          
+          output$rank1 = renderPlot({ 
+            taxa.bin.boxplot(taxa_dataBinvar, taxa_dataTaxa, taxa.outputs$DAoutput, chooseData$taxa.names.out, 1, TRUE)  
+          })
+          
+          output$rank2 = renderPlot({ 
+            taxa.bin.boxplot(taxa_dataBinvar, taxa_dataTaxa, taxa.outputs$DAoutput, chooseData$taxa.names.out, 2, TRUE)  ####all.t.test.united should be used
+          })
+          
+          output$rank3 = renderPlot({ 
+            taxa.bin.boxplot(taxa_dataBinvar, taxa_dataTaxa, taxa.outputs$DAoutput, chooseData$taxa.names.out, 3, TRUE)  ####all.t.test.united should be used
+          })
+          
+          output$rank4 = renderPlot({ 
+            taxa.bin.boxplot(taxa_dataBinvar, taxa_dataTaxa, taxa.outputs$DAoutput, chooseData$taxa.names.out, 4, TRUE)  ####all.t.test.united should be used
+          })
+          
+          output$rank5 = renderPlot({ 
+            taxa.bin.boxplot(taxa_dataBinvar, taxa_dataTaxa, taxa.outputs$DAoutput, chooseData$taxa.names.out, 5, TRUE)  ####all.t.test.united should be used
+          })
+          
+          output$rank6 = renderPlot({ 
+            taxa.bin.boxplot(taxa_dataBinvar, taxa_dataTaxa, taxa.outputs$DAoutput, chooseData$taxa.names.out, 6, TRUE)  ####all.t.test.united should be used
+          })
+          
+        }else if (input$chooseMethod_taxa == "Wilcoxon rank-sum test (default)") {
+          incProgress(5/10, message = "Wilcoxon rank-sum test")
+          taxa.wilcox.test.out <- taxa.bin.wilcox.test.united(taxa.results$bin.var, taxa.results$taxa)
+          taxa.wilcox.test.q.out <- bin.q.united.func(taxa.wilcox.test.out, method = "BH")
+          taxa.wilcox.test.est.added <- taxa.wilcox.test.est.func(taxa.results$bin.var, taxa.results$taxa, rename.cats_ref, rename.cats_com, taxa.wilcox.test.q.out)
+          
+          taxa.outputs$DAoutput = taxa.wilcox.test.est.added
+          
+          nrow <- numeric()
+          for (r in 1:6) {
+            row.num <- ceiling(sum(taxa.outputs$DAoutput[[r]]$Q.value < 0.05)/4)
+            if (row.num > 0) {
+              nrow[r] <- row.num
+            } else {
+              nrow[r] <- 1
             }
           }
           
@@ -3384,7 +3556,7 @@ server = function(input, output, session) {
             )
           })
           
-          output$boom_taxa = renderGrViz({
+          output$boom_taxa= renderGrViz({
             taxa.sig.dend(taxa.outputs$DAoutput, chooseData$NAadded$tax.tab, "twopi", include)$flow.text
           })
           
@@ -3417,6 +3589,7 @@ server = function(input, output, session) {
               kable_styling(latex_options = c('hold_position'))
             sig.tab5
           })
+          
           
           output$taxa_display_results_hmm= renderUI({
             tagList(
@@ -3467,9 +3640,8 @@ server = function(input, output, session) {
           output$rank6 = renderPlot({ 
             taxa.bin.boxplot(taxa_dataBinvar, taxa_dataTaxa, taxa.outputs$DAoutput, chooseData$taxa.names.out, 6, TRUE)  ####all.t.test.united should be used
           })
-          
-          
-        } 
+        }
+        
         
         else if (input$chooseMethod_taxa == "Linear regression"| input$chooseMethod_taxa == "Negative binomial regression" | input$chooseMethod_taxa == "Beta regression") {
           if (input$covariates_taxa == "None") {
