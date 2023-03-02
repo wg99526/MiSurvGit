@@ -4387,7 +4387,6 @@ server = function(input, output, session) {
           }else{
             height_forest[j] <- 800
             }
-          
         }
         
         if (any(!is.na(unlist(taxa.names.out.surv$duplicates)))) {
