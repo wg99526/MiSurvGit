@@ -4380,13 +4380,11 @@ server = function(input, output, session) {
           out <- forestplot.data$all.text.tab[[j]]
           sum.sig.by.rank <- nrow(out)-1
           
-          if(sum.sig.by.rank == 0){height_forest[j] <- 200} else if (sum.sig.by.rank ==1){
-            height_forest[j] <- 150
-          } else if (sum.sig.by.rank <6 & sum.sig.by.rank >1){
-            height_forest[j] <- 300
-          }else if (sum.sig.by.rank <= 20 &sum.sig.by.rank >=6){
-            height_forest[j] <- 500
-          } else {height_forest[j] <-  800}
+          if(sum.sig.by.rank == 0)
+            {height_forest[j] <- 200} 
+          else {
+            height_forest[j] <- 25*sum.sig.by.rank 
+          }
         }
         
         
