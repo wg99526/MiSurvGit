@@ -242,7 +242,7 @@ taxa.surv.forest.plot.pages2 <- function(page.taxa.q.out, page) {
     if(text.tab.all[1,5] == "Coef"){
       if(nrow(ci.tab.all) <= 5) {
         forestplot(labeltext=text.tab.all, mean=ci.tab.all[,1], lower=ci.tab.all[,2], upper=ci.tab.all[,3],
-                   hrzl_lines=TRUE, new_page=TRUE, boxsize=0.25, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), lineheight = unit(1, "cm"), #line.margin = unit(0.2, "cm"),
+                   hrzl_lines=TRUE, new_page=TRUE, boxsize=0.3, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), lineheight = unit(1, "cm"), #line.margin = unit(0.2, "cm"),
                    col=fpColors(box=rgb(1,0,0,0.5), line="black", summary="red3"), xlab="95% Confidence Interval for HR", mar = unit(c(0.5,0,0.5,0), "cm"), #mar = unit(c(blank.space,0,0,0), "cm"),
                    txt_gp=fpTxtGp(label=list(gpar(fontfamily="", cex=0.75), gpar(fontfamily="", cex=0.75)),
                                   ticks=gpar(fontfamily="", cex=0.75),
@@ -250,14 +250,14 @@ taxa.surv.forest.plot.pages2 <- function(page.taxa.q.out, page) {
       }
       else if(nrow(ci.tab.all) <= 45){
         forestplot(labeltext=text.tab.all, mean=ci.tab.all[,1], lower=ci.tab.all[,2], upper=ci.tab.all[,3],
-                   hrzl_lines=TRUE, new_page=TRUE, boxsize=0.12, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), lineheight = "lines", line.margin = unit(0.12, "cm"),
+                   hrzl_lines=TRUE, new_page=TRUE, boxsize=0.3, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), lineheight = "lines", line.margin = unit(0.12, "cm"),
                    col=fpColors(box=rgb(1,0,0,0.5), line="black", summary="red3"), xlab="95% Confidence Interval for HR", mar = unit(c(0.5,0,0.5,0), "cm"), #mar = unit(c(blank.space,0,0,0), "cm"),
                    txt_gp=fpTxtGp(label=list(gpar(fontfamily="", cex=0.75), gpar(fontfamily="", cex=0.75)),
                                   ticks=gpar(fontfamily="", cex=0.75),
                                   xlab=gpar(fontfamily="", cex=0.75)))
       } else {
         forestplot(labeltext=text.tab.all, mean=ci.tab.all[,1], lower=ci.tab.all[,2], upper=ci.tab.all[,3],
-                   hrzl_lines=TRUE, new_page=TRUE, boxsize=0.12, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), 
+                   hrzl_lines=TRUE, new_page=TRUE, boxsize=0.3, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), 
                    col=fpColors(box=rgb(1,0,0,0.5), line="black", summary="red3"), xlab="95% Confidence Interval for HR", mar = unit(c(0.5,0,0.5,0), "cm"), #mar = unit(c(blank.space,0,0,0), "cm"),
                    txt_gp=fpTxtGp(label=list(gpar(fontfamily="", cex=0.75), gpar(fontfamily="", cex=0.75)),
                                   ticks=gpar(fontfamily="", cex=0.75),
@@ -267,21 +267,21 @@ taxa.surv.forest.plot.pages2 <- function(page.taxa.q.out, page) {
     } else {
       if(nrow(ci.tab.all) <= 5){
         forestplot(labeltext=text.tab.all, mean=ci.tab.all[,1], lower=ci.tab.all[,2], upper=ci.tab.all[,3],
-                   zero = 1, hrzl_lines=TRUE, new_page=TRUE, boxsize=0.12, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), lineheight = unit(1, "cm"), #line.margin = unit(0.08, "cm"),
+                   zero = 1, hrzl_lines=TRUE, new_page=TRUE, boxsize=0.3, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), lineheight = unit(1, "cm"), #line.margin = unit(0.08, "cm"),
                    col=fpColors(box=rgb(1,0,0,0.5), line="black", summary="red3"), xlab="95% Confidence Interval for HR", mar = unit(c(0.5,0,0.5,0), "cm"), #mar = unit(c(blank.space,0,0,0), "cm"),
                    txt_gp=fpTxtGp(label=list(gpar(fontfamily="", cex=0.75), gpar(fontfamily="", cex=0.75)),
                                   ticks=gpar(fontfamily="", cex=0.75),
                                   xlab=gpar(fontfamily="", cex=0.75)))
       } else if(nrow(ci.tab.all) <= 45){
         forestplot(labeltext=text.tab.all, mean=ci.tab.all[,1], lower=ci.tab.all[,2], upper=ci.tab.all[,3],
-                   zero = 1, hrzl_lines=TRUE, new_page=TRUE, boxsize=0.12, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), lineheight = "lines", line.margin = unit(0.12, "cm"),
+                   zero = 1, hrzl_lines=TRUE, new_page=TRUE, boxsize=0.3, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), lineheight = "lines", line.margin = unit(0.12, "cm"),
                    col=fpColors(box=rgb(1,0,0,0.5), line="black", summary="red3"), xlab="95% Confidence Interval for HR", mar = unit(c(0.5,0,0.5,0), "cm"), #mar = unit(c(blank.space,0,0,0), "cm"),
                    txt_gp=fpTxtGp(label=list(gpar(fontfamily="", cex=0.75), gpar(fontfamily="", cex=0.75)),
                                   ticks=gpar(fontfamily="", cex=0.75),
                                   xlab=gpar(fontfamily="", cex=0.75)))
       } else {
         forestplot(labeltext=text.tab.all, mean=ci.tab.all[,1], lower=ci.tab.all[,2], upper=ci.tab.all[,3],
-                   zero = 1, hrzl_lines=TRUE, new_page=TRUE, boxsize=0.12, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), 
+                   zero = 1, hrzl_lines=TRUE, new_page=TRUE, boxsize=0.3, grid=0, colgap = unit(1, "cm"), graphwidth = unit(8.5, "cm"), 
                    col=fpColors(box=rgb(1,0,0,0.5), line="black", summary="red3"), xlab="95% Confidence Interval for HR", mar = unit(c(0.5,0,0.5,0), "cm"), #mar = unit(c(blank.space,0,0,0), "cm"),
                    txt_gp=fpTxtGp(label=list(gpar(fontfamily="", cex=0.75), gpar(fontfamily="", cex=0.75)),
                                   ticks=gpar(fontfamily="", cex=0.75),
