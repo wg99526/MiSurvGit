@@ -58,12 +58,12 @@ source("Source/MiDataProc.Surv.Model4.R")
   HOME_COMMENT3 = p(strong("Module 2:"), "Comparative analysis in microbial composition between treatment groups, not involving survival data, with or without covariate adjustment(s).", style = "font-size:13pt")
   HOME_COMMENT5 = p(strong("Module 4:"), "Prediction modeling using microbial taxa at different taxonomic ranks on survival responses", style = "font-size:13pt")
   
-  HOME_COMMENT6 = p(strong("URLs:"), " Web server (online implementation):", tags$a(href = "http://misurv.micloud.kr", "http://misurv.micloud.kr"), 
-                    "; GitHub repository (local implementation):", 
+  HOME_COMMENT6 = p(strong("URLs:"), " Web server :", tags$a(href = "http://misurv.micloud.kr", "http://misurv.micloud.kr"), 
+                    "; GitHub :", 
                     tags$a(href = "https://github.com/wg99526/misurvgit", "https://github.com/wg99526/misurvgit"), style = "font-size:13pt")
   HOME_COMMENT7 = p(strong("Maintainers:"), " Won Gu (", tags$a(href = "wpg5129@psu.edu", "wpg5129@psu.edu"), 
                     "); Hyojung Jang (", tags$a(href = "hyojung.jang@stonybrook.edu", "hyojung.jang@stonybrook.edu"), ")", style = "font-size:13pt")
-  HOME_COMMENT8 = p(strong("Reference:"), "Gu W, Koh H, Jang HJ, Lee B, Kang B. MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. (in review)", style = "font-size:13pt")
+  HOME_COMMENT8 = p(strong("Reference:"), "Gu W, Koh H, Jang HJ, Lee B, Kang B. MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. Microbiology Spectrum (https://doi.org/10.1128/spectrum.05059-22)", style = "font-size:13pt")
   
   
   
