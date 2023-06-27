@@ -4,7 +4,7 @@ list.of.packages <- c('seqinr', 'shinydashboard', 'dashboardthemes', 'tidyverse'
                       'DT', 'htmltools', 'phangorn', 'bios2mds', 'zip', 'zCompositions', 'dplyr', 'forestplot', 'quantreg', 'fossil', 'picante',
                       'entropart', 'lme4', 'lmerTest', 'broom.mixed', 'gee', 'geepack', 'dirmult', 'robustbase', 'robCompositions', 'BiasedUrn',
                       'CompQuadForm', 'GUniFrac', 'ecodist', 'MiRKAT', 'gridExtra', 'ggplot2', 'patchwork', 'ggthemes', 'erer', 'DiagrammeR', 'stringr',
-                      'devtools', 'betareg', 'nlme', 'glmm', 'remotes', 'gridGraphics', 'compositions', 'rgl', 'vegan3d', 'pca3d', 'jpeg', 'splitTools', 
+                      'devtools', 'betareg', 'nlme', 'glmm', 'remotes', 'gridGraphics', 'compositions', 'rgl', 'vegan3d', 'jpeg', 'splitTools', 
                       'survival', 'survminer', 'coin', 'randomForestSRC', 'kableExtra', 'caret', 'randomForest', 'glmnet')
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
@@ -33,7 +33,6 @@ library(zip)
 library(randomForestSRC)
 library(rgl)
 library(vegan3d)
-library(pca3d)
 library(jpeg)
 library(splitTools)
 
