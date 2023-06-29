@@ -61,7 +61,7 @@ source("Source/MiDataProc.Surv.Model4.R")
                     "; GitHub :", 
                     tags$a(href = "https://github.com/wg99526/misurvgit", "https://github.com/wg99526/misurvgit"), style = "font-size:13pt")
   HOME_COMMENT7 = p(strong("Maintainers:"), " Won Gu (", tags$a(href = "wpg5129@psu.edu", "wpg5129@psu.edu"), 
-                    "); Hyojung Jang (", tags$a(href = "hyojung.jang@stonybrook.edu", "hyojung.jang@stonybrook.edu"), ")", style = "font-size:13pt")
+                    "); Hyojung Jang (", tags$a(href = "hyojung.jang@northwestern.edu", "hyojung.jang@northwestern.edu"), ")", style = "font-size:13pt")
   HOME_COMMENT8 = p(strong("Reference:"), "Gu W, Koh H, Jang HJ, Lee B, Kang B. MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. Microbiology Spectrum (https://doi.org/10.1128/spectrum.05059-22)", style = "font-size:13pt")
   
   
