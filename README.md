@@ -6,7 +6,7 @@ Version: 1.0.0
 
 Date: 2023-02-24
 
-Maintainer: Won Gu <wpg5129@psu.edu> Hyojung Jang <hyojung.jang@stonybrook.edu> 
+Maintainer: Won Gu <wpg5129@psu.edu> Hyojung Jang <hyojung.jang@northwestern.edu> 
 
 Description: MiSurv is an integrative web cloud platform for processing, analyzing and visualizing microbiome data with survival responses. MiSurv consists of a data processing module and its following four data analytic modules as below.
 
