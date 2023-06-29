@@ -1933,12 +1933,12 @@ server = function(input, output, session) {
       }
     })
     
-    observeEvent(input$covariatesCoxTaca,{
-      if (input$covariatesCoxTaca == "Covariate(s)") {
+    observeEvent(input$covariatesCoxTaxa,{
+      if (input$covariatesCoxTaxa == "Covariate(s)") {
         
         shinyjs::show("covariates_variablesCoxT")
         
-      } else if (input$covariatesCoxTaca == "None") {
+      } else if (input$covariatesCoxTaxa == "None") {
         
         shinyjs::hide("covariates_variablesCoxT")
         
