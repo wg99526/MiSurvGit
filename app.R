@@ -188,22 +188,21 @@ source("Source/MiDataProc.Surv.Model4.R")
     dashboardSidebar(
       tags$script(JS("document.getElementsByClassName('sidebar-toggle')[0].style.visibility = 'hidden';")),
       sidebarMenu(id = "side_menu",
-                  menuItem("Home", tabName = "home", icon = icon("home")),
-                  menuItem("Data Processing",  icon = icon("file-text-o"),
+                  menuItem("Home", tabName = "home"),
+                  menuItem("Data Processing", 
                            menuSubItem("Data Input", tabName = "step1", icon = icon("mouse")),
                            menuSubItem("Quality Control", tabName = "step2", icon = icon("chart-bar")),
                            menuSubItem("Data Transformation", tabName = "step3", icon = icon("calculator"))), #or, icon th-large
-                  menuItem("Module 1", tabName = "SurvAnalysis", icon = icon("bar-chart-o")
-                  ),
-                  menuItem("Module 2",  icon = icon("chart-pie"),
+                  menuItem("Module 1", tabName = "SurvAnalysis"),
+                  menuItem("Module 2",
                            menuSubItem("Alpha Diversity", tabName = "alphaDivanalysis", icon = icon("font")),
                            menuSubItem("Beta Diversity", tabName = "betaDivanalysis", icon = icon("bold")),
                            menuSubItem("Taxonomic Abundance", tabName = "taxaAnalysis", icon = icon("align-left"))),
-                  menuItem("Module 3",  icon = icon("disease"),
+                  menuItem("Module 3", 
                            menuSubItem("Alpha Diversity", tabName = "alphaDivanalysisSurv", icon = icon("font")),
                            menuSubItem("Beta Diversity", tabName = "betaDivanalysisSurv", icon = icon("bold")),
                            menuSubItem("Taxonomic Abundance", tabName = "taxaAnalysisSurv", icon = icon("align-left"))),
-                  menuItem("Module 4", tabName = "RandomForest", icon = icon("tree")))),
+                  menuItem("Module 4", tabName = "RandomForest"))),
     dashboardBody(
       tags$head(tags$style(HTML(".content { padding-top: 2px;}"))),
       tags$script(src = "fileInput_text.js"),
