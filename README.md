@@ -52,4 +52,4 @@ runGitHub("MiSurvGit", "wg99526", ref = "main")
 
 # Troubleshooting Tips
 
-If you have any problems for using MiSurv, please report in Issues (https://github.com/wg99526/MiSurvGit/issues) or email Won Gu (wpg5129@psu.edu) or Hyojung Jang (hyojung.jang@stonybrook.edu). 
+If you have any problems for using MiSurv, please report in Issues (https://github.com/wg99526/MiSurvGit/issues) or email Won Gu (wpg5129@psu.edu) or Hyojung Jang (hyojung.jang@northwestern.edu). 
