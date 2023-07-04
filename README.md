@@ -33,7 +33,7 @@ Description: MiSurv is an integrative web cloud platform for processing, analyzi
 
 ## References
 
-* Gu, W., Koh, H., Jang, H., Lee, B., Kang, B. (2023). MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. Microbiology Spectrum 11(3): e05059-22
+* Gu, W., Koh, H., Jang, H., Lee, B., Kang, B. (2023). MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. *_Microbiology Spectrum_* 11(3): e05059-22
 
 # Prerequites
 
