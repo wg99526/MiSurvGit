@@ -4380,8 +4380,10 @@ server = function(input, output, session) {
           
           if(sum.sig.by.rank == 0)
             {height_forest[j] <- 200} 
-          else if (sum.sig.by.rank > 0 & sum.sig.by.rank <30 ){
-            height_forest[j] <- 25*sum.sig.by.rank 
+          else if (sum.sig.by.rank > 0 & sum.sig.by.rank < 4 ){
+            height_forest[j] <- 70*sum.sig.by.rank 
+          }else if (sum.sig.by.rank > 3 & sum.sig.by.rank < 30 ){
+            height_forest[j] <- 40*sum.sig.by.rank 
           }else{
             height_forest[j] <- 800
             }
