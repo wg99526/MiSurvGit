@@ -451,7 +451,7 @@ source("Source/MiDataProc.Surv.Model4.R")
                   
                   mainPanel(width = 9,
                             fluidRow(width = 8, 
-                                     div(style='height:800px;overflow-y: scroll;', uiOutput("taxa_display_results_hmm")), br(),br(),
+                                     div(style='height:800px;overflow-y: scroll;', uiOutput("tdisplay_results_hmm")), br(),br(),
                                      uiOutput("vis_rank"))
                   ))),
         
@@ -3274,7 +3274,7 @@ server = function(input, output, session) {
             } 
           }
           
-          output$taxa_display_results_hmm= renderUI({
+          output$tdisplay_results_hmm= renderUI({
             tagList(
               tabBox(title = strong("Box Plot", style = "color:black"), width = NULL,
                      tabPanel("Phylum", align = "center",
@@ -3466,7 +3466,7 @@ server = function(input, output, session) {
             }
           }
           
-          output$taxa_display_results_hmm= renderUI({
+          output$tdisplay_results_hmm= renderUI({
             tagList(
               tabBox(title = strong("Box Plot", style = "color:black"), width = NULL,
                      tabPanel("Phylum", align = "center",
@@ -3707,7 +3707,7 @@ server = function(input, output, session) {
           }
           
           if (duplicate.texts>0) {
-            output$taxa_display_results_hmm = renderUI({
+            output$tdisplay_results_hmm = renderUI({
               tagList(
                 do.call(tabsetPanel, lapply(1:nrow, function(i) {
                   tabPanel(title = paste0("Page ", i), align = "center",
