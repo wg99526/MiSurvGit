@@ -504,9 +504,9 @@ source("Source/MiDataProc.Surv.Model4.R")
                                                        uiOutput("referencesM3.taxa"))),
                   mainPanel(width = 9,
                             fluidRow(width = 12, 
-                                     div(style='height:700px;overflow-y: scroll;', uiOutput("surv_taxa_results")), br(),br(), #s_taxa_display_result 
+                                     div(style='height:700px;overflow-y: scroll;', uiOutput("m3taxa_results")), br(),br(), #s_taxa_display_result 
                                      
-                                     uiOutput("survival_taxa_display_dend"))
+                                     uiOutput("m3taxa_display_dend"))
                             
                   ))),
         
@@ -4398,7 +4398,7 @@ server = function(input, output, session) {
         }
         
         if (duplicate.texts > 0) {
-          output$surv_taxa_results = renderUI({
+          output$m3taxa_results = renderUI({
             tagList(
               do.call(tabsetPanel, lapply(1:nrow, function(i) {
                 tabPanel(title = paste0("Page ", i), align = "center",
@@ -4408,7 +4408,7 @@ server = function(input, output, session) {
             )
           })
         } else {
-          output$surv_taxa_results= renderUI({
+          output$m3taxa_results= renderUI({
             tagList(
               do.call(tabsetPanel, lapply(1:nrow, function(i) {
                 tabPanel(title = paste0("Page ", i), align = "center",
@@ -4495,7 +4495,7 @@ server = function(input, output, session) {
           tab.five <- na.omit(tab.five)
         }
         
-        output$survival_taxa_display_dend = renderUI({
+        output$m3taxa_display_dend = renderUI({
           
           box(title = strong("Dendrogram"), width = 12, status = "primary", solidHeader = TRUE,
               
