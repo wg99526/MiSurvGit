@@ -3717,7 +3717,7 @@ server = function(input, output, session) {
               )
             })
           } else {
-            output$taxa_display_results = renderUI({
+            output$tdisplay_results_hmm = renderUI({
               tagList(
                 do.call(tabsetPanel, lapply(1:nrow, function(i) {
                   tabPanel(title = paste0("Page ", i), align = "center",
