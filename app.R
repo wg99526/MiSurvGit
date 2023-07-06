@@ -1,5 +1,4 @@
 rm(list = ls())
-
 list.of.packages <- c('seqinr', 'shinydashboard', 'dashboardthemes', 'tidyverse', 'plotly', 'shinyWidgets', 'shinyjs', 'googleVis', 'xtable', 
                       'DT', 'htmltools', 'phangorn', 'bios2mds', 'zip', 'zCompositions', 'dplyr', 'forestplot', 'quantreg', 'fossil', 'picante',
                       'entropart', 'lme4', 'lmerTest', 'broom.mixed', 'gee', 'geepack', 'dirmult', 'robustbase', 'robCompositions', 'BiasedUrn',
@@ -84,12 +83,12 @@ source("Source/MiDataProc.Surv.Model4.R")
                               , style = "font-size:11pt")
   
   INPUT_PHYLOSEQ_COMMENT2 = p("You can download example microbiome data 'biom.Rdata' in the 'phyloseq' format.", br(), 
-  "For more details about 'phyloseq', see", 
+                              "For more details about 'phyloseq', see", 
                               tags$a(href = "https://bioconductor.org/packages/release/bioc/html/phyloseq.html", "https://bioconductor.org/packages/release/bioc/html/phyloseq.html"),
                               br(),
-  p(strong("Data description:"), "This example data are the public gut microbiome data (Zhang et al. 2018) we used in our real data applications (Gu et al., in review). The raw sequence data are deposited in QIITA (", tags$a(href = "https://qiita.ucsd.edu", "https://qiita.ucsd.edu"), ") with the ID number 10508 (", tags$a(href = "https://qiita.ucsd.edu/study/description/10508", "https://qiita.ucsd.edu/study/description/10508"), "). More detailed sample extraction and raw sequence data processing procedures are described in (Zhang et al. 2018; Gu et al., in review). "), 
-  
-  br(), 
+                              p(strong("Data description:"), "This example data are the public gut microbiome data (Zhang et al. 2018) we used in our real data applications (Gu et al., in review). The raw sequence data are deposited in QIITA (", tags$a(href = "https://qiita.ucsd.edu", "https://qiita.ucsd.edu"), ") with the ID number 10508 (", tags$a(href = "https://qiita.ucsd.edu/study/description/10508", "https://qiita.ucsd.edu/study/description/10508"), "). More detailed sample extraction and raw sequence data processing procedures are described in (Zhang et al. 2018; Gu et al., in review). "), 
+                              
+                              br(), 
                               "> setwd('/yourdatadirectory/')", br(), br(), 
                               "> load(file = 'biom.Rdata')", br(), br(), 
                               "> library(phyloseq)", br(), br(), 
@@ -364,7 +363,7 @@ source("Source/MiDataProc.Surv.Model4.R")
                                     actionButton("divCalcRun", (strong("Run!")), class = "btn-info"), 
                                     p(" ", style = "margin-bottom: +10px;"),
                                     p(strong("Attention:"), "Once you changed any setting in the preceding Data Input or Quality Control, you have to click this Run button again to use any of the following data analytic modules."),
-                                    ),
+                                ),
                                 uiOutput("divCalcDownload")),
                          column(width = 6, style='padding-left:0px',
                                 box(title = strong("References"), width = NULL, status = "primary", solidHeader = TRUE,
@@ -451,7 +450,7 @@ source("Source/MiDataProc.Surv.Model4.R")
                   
                   mainPanel(width = 9,
                             fluidRow(width = 8, 
-                                     div(style='height:800px;overflow-y: scroll;', uiOutput("tdisplay_results_hmm")), br(),br(),
+                                     div(style='height:800px;overflow-y: scroll;', uiOutput("tresults_hmm")), br(),br(),
                                      uiOutput("vis_rank"))
                   ))),
         
@@ -506,7 +505,7 @@ source("Source/MiDataProc.Surv.Model4.R")
                             fluidRow(width = 12, 
                                      div(style='height:700px;overflow-y: scroll;', uiOutput("m3taxa_results")), br(),br(), #s_taxa_display_result 
                                      
-                                     uiOutput("m3taxa_display_dend"))
+                                     uiOutput("m3taxa_dend"))
                             
                   ))),
         
@@ -1842,7 +1841,7 @@ server = function(input, output, session) {
       }
     })
     
-   
+    
     
     ######################################
     ######### Taxa Surv Analysis #########
@@ -3274,7 +3273,7 @@ server = function(input, output, session) {
             } 
           }
           
-          output$tdisplay_results_hmm= renderUI({
+          output$tresults_hmm= renderUI({
             tagList(
               tabBox(title = strong("Box Plot", style = "color:black"), width = NULL,
                      tabPanel("Phylum", align = "center",
@@ -3466,7 +3465,7 @@ server = function(input, output, session) {
             }
           }
           
-          output$tdisplay_results_hmm= renderUI({
+          output$tresults_hmm= renderUI({
             tagList(
               tabBox(title = strong("Box Plot", style = "color:black"), width = NULL,
                      tabPanel("Phylum", align = "center",
@@ -3707,7 +3706,7 @@ server = function(input, output, session) {
           }
           
           if (duplicate.texts>0) {
-            output$tdisplay_results_hmm = renderUI({
+            output$tresults_hmm = renderUI({
               tagList(
                 do.call(tabsetPanel, lapply(1:nrow, function(i) {
                   tabPanel(title = paste0("Page ", i), align = "center",
@@ -3717,7 +3716,7 @@ server = function(input, output, session) {
               )
             })
           } else {
-            output$tdisplay_results_hmm = renderUI({
+            output$tresults_hmm = renderUI({
               tagList(
                 do.call(tabsetPanel, lapply(1:nrow, function(i) {
                   tabPanel(title = paste0("Page ", i), align = "center",
@@ -4379,14 +4378,14 @@ server = function(input, output, session) {
           sum.sig.by.rank <- nrow(out)-1
           
           if(sum.sig.by.rank == 0)
-            {height_forest[j] <- 200} 
+          {height_forest[j] <- 200} 
           else if (sum.sig.by.rank > 0 & sum.sig.by.rank < 4 ){
             height_forest[j] <- 70*sum.sig.by.rank 
           }else if (sum.sig.by.rank > 3 & sum.sig.by.rank < 30 ){
             height_forest[j] <- 40*sum.sig.by.rank 
           }else{
             height_forest[j] <- 800
-            }
+          }
         }
         
         if (any(!is.na(unlist(taxa.names.out.surv$duplicates)))) {
@@ -4495,7 +4494,7 @@ server = function(input, output, session) {
           tab.five <- na.omit(tab.five)
         }
         
-        output$m3taxa_display_dend = renderUI({
+        output$m3taxa_dend = renderUI({
           
           box(title = strong("Dendrogram"), width = 12, status = "primary", solidHeader = TRUE,
               
@@ -4523,7 +4522,6 @@ server = function(input, output, session) {
           sig.tab1
         })
         output$M3sig_2_taxonlist <- renderText({
-          
           sig.tab2 <- kable(tab.two, 'html', booktabs =TRUE, escape = FALSE) %>%
             kable_styling(latex_options = c('hold_position'))
           sig.tab2
