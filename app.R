@@ -4319,9 +4319,9 @@ server = function(input, output, session) {
     
     if (input$subgroup.t== "Yes"){
       ind.sub <- taxa.sam.dat[[input$subgroup.sel.t]] == input$pick_subgroup.t
-      taxa.sam.dat <- taxa.sam.dat[-ind.sub,]  
+      taxa.sam.dat <- taxa.sam.dat[ind.sub,]  
       taxa.out.surv <- lapply(taxa.out.surv, function(x){
-        return(x[-ind.sub,])})
+        return(x[ind.sub,])})
     }
     
     validate(
@@ -4621,13 +4621,13 @@ server = function(input, output, session) {
     if (input$subgroup.4 == "Yes"){
       
       ind.sub <- taxa.sam.dat[[input$subgroup.sel.4]] == input$pick_subgroup.4
-      taxa.sam.dat <- taxa.sam.dat[-ind.sub,]  
+      taxa.sam.dat <- taxa.sam.dat[ind.sub,]  
       surv.dat <- surv.events.dat.func(taxa.sam.dat, 
                                        surv.con = chooseData$surv.Time.select, 
                                        surv.second.bin = chooseData$censor.select)
       
       taxa.dat.4 <- lapply(taxa.dat.4, function(x){
-        return(x[-ind.sub,])})
+        return(x[ind.sub,])})
     }
     
     validate(
