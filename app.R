@@ -4375,16 +4375,21 @@ server = function(input, output, session) {
         
         for (j in 1:nrow){
           out <- forestplot.data$all.text.tab[[j]]
-          sum.sig.by.rank <- nrow(out)-1
           
-          if(sum.sig.by.rank == 0)
-          {height_forest[j] <- 200} 
-          else if (sum.sig.by.rank > 0 & sum.sig.by.rank < 4 ){
-            height_forest[j] <- 70*sum.sig.by.rank 
-          }else if (sum.sig.by.rank > 3 & sum.sig.by.rank < 30 ){
-            height_forest[j] <- 40*sum.sig.by.rank 
+          if(is.null(out)){
+            height_forest[j] <- 200
           }else{
-            height_forest[j] <- 800
+            sum.sig.by.rank <- nrow(out)
+            
+            if(sum.sig.by.rank == 0)  #여기수정 
+            {height_forest[j] <- 200} 
+            else if (sum.sig.by.rank > 0 & sum.sig.by.rank < 4 ){
+              height_forest[j] <- 70*sum.sig.by.rank 
+            }else if (sum.sig.by.rank > 3 & sum.sig.by.rank < 30 ){
+              height_forest[j] <- 40*sum.sig.by.rank 
+            }else{
+              height_forest[j] <- 800
+            }
           }
         }
         
