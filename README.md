@@ -4,7 +4,7 @@ Title: MiSurv: An Integrative Web Cloud Platform for Comprehensive Microbiome Da
 
 Version: 1.0.0
 
-Date: 2023-02-24
+Date: 2023-07-09
 
 Maintainer: Won Gu <wpg5129@psu.edu> Hyojung Jang <hyojung.jang@northwestern.edu> 
 
