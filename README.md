@@ -28,8 +28,8 @@ Description: MiSurv is an integrative web cloud platform for processing, analyzi
  
 ## Example Data
 
-* We stored the all the final processed data that we used in our paper (Gu et al., _in review_) in the above Data folder as ‘phyloseq’ [37] format (see the file named ‘biom.Rdata’) and also as four individual files (see the files named ‘otu.tab.txt’, ‘sam.dat.txt’, ‘tax.tab.txt’, and ‘tree.tre’).
-* The raw sequence data are deposited in QIITA (https://qiita.ucsd.edu) with the ID number 10508 (https://qiita.ucsd.edu/study/description/10508). All the 
+* We stored the all the final processed data that we used in our paper (Gu et al., 2023) in the above Data folder as ‘phyloseq’ [37] format (see the file named ‘biom.Rdata’) and also as four individual files (see the files named ‘otu.tab.txt’, ‘sam.dat.txt’, ‘tax.tab.txt’, and ‘tree.tre’).
+* The raw sequence data are deposited in QIITA (https://qiita.ucsd.edu) with the ID number 10508 (https://qiita.ucsd.edu/study/description/10508). 
 
 ## References
 
