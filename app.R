@@ -1158,7 +1158,7 @@ server = function(input, output, session) {
         })
         
         
-        nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar]
+        nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar.Surv.select]
         
         output$covariates.Surv <- renderUI({
           tagList(
@@ -1540,7 +1540,7 @@ server = function(input, output, session) {
               textInput("alphaCat2", label = (paste0("Comparison: ",alpha.categos$cat2)), value = alpha.categos$cat2, width = '80%'))
           })
           
-          nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar.Surv.select]
+          nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar]
           
           output$covariates <- renderUI({
             tagList(
