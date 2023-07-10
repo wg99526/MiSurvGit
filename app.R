@@ -1760,7 +1760,7 @@ server = function(input, output, session) {
               textInput("taxaCat2", label = (paste0("Comparison: ",taxa.categos$cat2)), value = taxa.categos$cat2, width = '80%'))
           }) 
           
-          nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar.Surv.select]
+          nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar_taxa]
           
           output$covariates_taxa <- renderUI({
             tagList(
