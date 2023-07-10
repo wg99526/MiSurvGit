@@ -1315,7 +1315,7 @@ server = function(input, output, session) {
         
         subgroup.val <- alpha.bin.cat.ref.ori.func(chooseData$sam.dat, input$subgroup.sel.a)
         
-        output$pick_subgroup.a <- renderUI({
+        output$pick_subgroup.t <- renderUI({
           tagList(
             p(" ", style = "margin-bottom: -5px;"),
             shiny::div(id = "pick_subgroup.a", style = "margin-left: 5%",
