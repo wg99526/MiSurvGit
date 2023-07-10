@@ -4519,7 +4519,7 @@ server = function(input, output, session) {
           }else{
             sum.sig.by.rank <- nrow(out)
             
-            if(sum.sig.by.rank == 0)  #여기수정 
+            if(sum.sig.by.rank == 0)  
             {height_forest[j] <- 200} 
             else if (sum.sig.by.rank > 0 & sum.sig.by.rank < 4 ){
               height_forest[j] <- 70*sum.sig.by.rank 
