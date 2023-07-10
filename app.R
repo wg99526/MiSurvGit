@@ -1901,77 +1901,84 @@ server = function(input, output, session) {
         shinyjs::hide("pick_subgroup.t")
       }
     })
-    
     observeEvent(input$subgroup.sel.t, {
       if(input$subgroup.sel.t %in% infile$ori.var[[1]]){
         
         subgroup.val <- alpha.bin.cat.ref.ori.func(chooseData$sam.dat, input$subgroup.sel.t)
         
-        output$pick_subgroup.t <- renderUI({
+        #0710 수정 
+        output$pick_subgroup.taxa <- renderUI({
           tagList(
             p(" ", style = "margin-bottom: -5px;"),
             shiny::div(id = "pick_subgroup.t", style = "margin-left: 5%",
-                       radioButtons("pick_subgroup.t", label =  "Please select a subgroup:", 
+                       radioButtons("subgroup.taxa", label =  "Please select a subgroup:", 
                                     choices = subgroup.val,
                                     selected = subgroup.val[1], width = '70%')),
             p(" ", style = "margin-bottom: -20px;")
           )
         })
       }
-    })
-    
-    observeEvent(input$surv.dataType_taxa,{
-      if (input$surv.dataType_taxa == "Count (rarefied)") {
-        taxa.types$dataType_Surv = "rare.count"           #module3 taxa count 수정 0812
-      } else if (input$surv.dataType_taxa == "Proportion") {
-        taxa.types$dataType_Surv = "imp.prop"
-      } else if (input$surv.dataType_taxa == "CLR (Default)") {
-        taxa.types$dataType_Surv = "clr"
-      } else if (input$surv.dataType_taxa == "Arcsine-root") {
-        taxa.types$dataType_Surv = "arcsin"
-      }
-    })
-    
-    observeEvent(input$covariatesCoxTaxa,{
-      if (input$covariatesCoxTaxa == "Covariate(s)") {
-        
-        shinyjs::show("covariates_variablesCoxT")
-        
-      } else if (input$covariatesCoxTaxa == "None") {
-        
-        shinyjs::hide("covariates_variablesCoxT")
-        
-      }
-    })
-    
-    output$covariatesCoxT <- renderUI({
-      tagList(
-        p(" ", style = "margin-top: +25px;"),
-        
-        prettyRadioButtons("covariatesCoxTaxa",label = h4(strong("Covariate(s)?", style = "color:black")), status = "primary", icon = icon("check"),
-                           animation = "jelly", c("None", "Covariate(s)"), selected = "None",width = '70%'),
-        
-        shinyjs::hidden(
-          shiny::div(id = "covariates_variablesCoxT", style = "margin-left: 2%",
-                     prettyCheckboxGroup("covariatesOptionsCoxT"," Please select covariate(s)", status = "primary",
-                                         c(chooseData$nt.selected.bin, chooseData$nt.selected.con), width = '70%'))),
-        
-        p(" ", style = "margin-top: 5px;"),
-        
-        h4(strong("Method?", style = "color:black")),
-        
-        p(" ", style = "margin-bottom: -20px;"),
-        
-        radioButtons("surv3.taxa.method", label = "",#h4(strong("Method?", style = "color:black")),
-                     c("Cox model"), selected = "Cox model", width = '80%'),
-        
-        p(" ", style = "margin-bottom: -10px;"),
-        
-        prettyRadioButtons("include_species_model3", label = h4(strong("Taxonomic Ranks?", style = "color:black")), animation = "jelly",
-                           c("Phylum - Genus (Default)", "Phylum - Species"), selected = "Phylum - Genus (Default)",
-                           icon = icon("check"), width = '80%')#,
-        # actionButton("runbtn_CoxT", (strong("Run!")), class = "btn-info")
-      )
+      
+      
+      Options_cov <<- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[which(c(chooseData$nt.selected.bin, chooseData$nt.selected.con) != input$subgroup.sel.t)]
+      
+      observeEvent(input$surv.dataType_taxa,{
+        if (input$surv.dataType_taxa == "Count (rarefied)") {
+          taxa.types$dataType_Surv = "rare.count"          
+        } else if (input$surv.dataType_taxa == "Proportion") {
+          taxa.types$dataType_Surv = "imp.prop"
+        } else if (input$surv.dataType_taxa == "CLR (Default)") {
+          taxa.types$dataType_Surv = "clr"
+        } else if (input$surv.dataType_taxa == "Arcsine-root") {
+          taxa.types$dataType_Surv = "arcsin"
+        }
+      })
+      
+      observeEvent(input$covariatesCoxTaxa,{
+        if (input$covariatesCoxTaxa == "Covariate(s)") {
+          
+          shinyjs::show("covariates_variablesCoxT")
+          
+        } else if (input$covariatesCoxTaxa == "None") {
+          
+          shinyjs::hide("covariates_variablesCoxT")
+          
+        }
+      })
+      
+      
+      output$covariatesCoxT <- renderUI({
+        tagList(
+          p(" ", style = "margin-top: +25px;"),
+          
+          prettyRadioButtons("covariatesCoxTaxa",label = h4(strong("Covariate(s)?", style = "color:black")), status = "primary", icon = icon("check"),
+                             animation = "jelly", c("None", "Covariate(s)"), selected = "None",width = '70%'),
+          
+          # come here please
+          
+          shinyjs::hidden(
+            shiny::div(id = "covariates_variablesCoxT", style = "margin-left: 2%",
+                       prettyCheckboxGroup("covariatesOptionsCoxT"," Please select covariate(s)", status = "primary",
+                                           Options_cov, width = '70%'))),
+          
+          p(" ", style = "margin-top: 5px;"),
+          
+          h4(strong("Method?", style = "color:black")),
+          
+          p(" ", style = "margin-bottom: -20px;"),
+          
+          radioButtons("surv3.taxa.method", label = "",
+                       c("Cox model"), selected = "Cox model", width = '80%'),
+          
+          p(" ", style = "margin-bottom: -10px;"),
+          
+          prettyRadioButtons("include_species_model3", label = h4(strong("Taxonomic Ranks?", style = "color:black")), animation = "jelly",
+                             c("Phylum - Genus (Default)", "Phylum - Species"), selected = "Phylum - Genus (Default)",
+                             icon = icon("check"), width = '80%')#,
+          # actionButton("runbtn_CoxT", (strong("Run!")), class = "btn-info")
+        )
+      })
+      
     })
     
     ###############################################
@@ -4438,14 +4445,14 @@ server = function(input, output, session) {
     
     #shinyjs::disable("runbtn_CoxT")
     
-    taxa.sam.dat <- chooseData$sam.dat[match(rownames(chooseData$taxa.out$clr$phylum),rownames(chooseData$sam.dat)),]
-    taxa.out.surv <- chooseData$taxa.out[[taxa.types$dataType_Surv]]
-    taxa.out.surv <- try(taxa_no_miss_cov_ind(taxa.sam.dat, taxa.out.surv, input$covariatesOptionsCoxT), silent = TRUE) 
+    taxa.sam.dat <<- chooseData$sam.dat[match(rownames(chooseData$taxa.out$clr$phylum),rownames(chooseData$sam.dat)),]
+    taxa.out.surv <<- chooseData$taxa.out[[taxa.types$dataType_Surv]]
+    taxa.out.surv <<- try(taxa_no_miss_cov_ind(taxa.sam.dat, taxa.out.surv, input$covariatesOptionsCoxT), silent = TRUE) 
     
-    taxa.names.out.surv <- chooseData$taxa.names.out
+    taxa.names.out.surv <<- chooseData$taxa.names.out
     
     if (input$subgroup.t== "Yes"){
-      ind.sub <- taxa.sam.dat[[input$subgroup.sel.t]] == input$pick_subgroup.t
+      ind.sub <- taxa.sam.dat[[input$subgroup.sel.t]] == input$subgroup.taxa
       taxa.sam.dat <- taxa.sam.dat[ind.sub,]  
       taxa.out.surv <- lapply(taxa.out.surv, function(x){
         return(x[ind.sub,])})
