@@ -1663,7 +1663,7 @@ server = function(input, output, session) {
           
           #ntselected.prim_varsbin = cov.func(chooseData$sam.dat, chooseData$mon.sin.rev.bin.con, input$beta.primvar_cross)
           #ntselected.prim_vars = cov.func(chooseData$sam.dat, chooseData$mon.sin.rev.bin.con, input$beta.primvar_cross)
-          nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar.Surv.select]
+          nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$beta.primvar_cross]
           
           output$beta_covariates_cross <- renderUI({
             tagList(
