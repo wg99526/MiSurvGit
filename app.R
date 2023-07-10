@@ -1158,7 +1158,7 @@ server = function(input, output, session) {
         })
         
         
-        nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar.Surv.select]
+        nt.selected.prim <- c(chooseData$nt.selected.bin, chooseData$nt.selected.con)[!c(chooseData$nt.selected.bin, chooseData$nt.selected.con) %in% input$primvar]
         
         output$covariates.Surv <- renderUI({
           tagList(
