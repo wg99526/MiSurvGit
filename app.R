@@ -165,7 +165,7 @@ source("Source/MiDataProc.Surv.Model4.R")
                       "2. Chen J, Bittinger K, Charlson ES, Hoffmann C, Lewis J, Wu GD., et al. Associating microbiome composition with environmental 
                       covariates using generalized UniFrac distances. Bioinformatics. 2012;28(16):2106-13.", br(),
                       "3. Jaccard P. The distribution of the flora in the alpine zone. New Phytol. 1912;11(2):37-50.", br(),
-                      "4. Lozupone CA, Hamady M, Kelley ST, Knight R. Quantitative and qualitative β-diversity measures lead to 
+                      "4. Lozupone CA, Hamady M, Kelley ST, Knight R. Quantitative and qualitative beta-diversity measures lead to 
                       different insights into factors that structure microbial communities. Appl Environ Microbiol. 2007;73(5):1576-85.", br(),
                       "5. Lozupone CA, Knight R. UniFrac: A new phylogenetic method for comparing microbial communities. Appl Environ Microbiol. 2005;71(12):8228-35.")
   DATA_TRANSFORM_COMMENT = p("Transform the count (original) data into four different formats 1) count (rarefied) (Sanders, 1968), 2) proportion, 3) centered log ratio (CLR) (Aitchison, 1982), 4) arcsine-root for each taxonomic rank (phylum, class, order, family, genus, species).")
