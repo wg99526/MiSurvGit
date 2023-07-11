@@ -2,7 +2,7 @@
 
 Title: MiSurv: An Integrative Web Cloud Platform for Comprehensive Microbiome Data Analysis with Survival Responses
 
-Version: 1.0.0
+Version: 2.0.0
 
 Date: 2023-07-12
 
