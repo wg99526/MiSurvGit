@@ -4799,14 +4799,14 @@ server = function(input, output, session) {
                 p("You can download the summary statistics and data analysis outputs.",
                   style = "font-size:11pt"),
                 h5("Data Analysis Outputs"),
-                downloadButton("tdownloadTabl2", "Download", width = '50%', style = "background-color: red3"),
+                downloadButton("survtdownload", "Download", width = '50%', style = "background-color: red3"),
                 h5("Dendrogram"),
-                downloadButton("gdownload", "Download", width = '50%', style = "background-color: red3")
+                downloadButton("survgdownload", "Download", width = '50%', style = "background-color: red3")
             )
           )
         })
         
-        output$tdownloadTabl2 <- downloadHandler(
+        output$survtdownload <- downloadHandler(
           filename = function() {
             paste("Taxa.Analysis.Output.zip")
           },
@@ -4824,7 +4824,7 @@ server = function(input, output, session) {
           }
         )
         
-        output$gdownload <- downloadHandler(
+        output$survgdownload <- downloadHandler(
           filename = function() {
             paste("Taxa.Analysis.Graphical.Output", ".html", sep="")
           },
