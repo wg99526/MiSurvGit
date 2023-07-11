@@ -37,7 +37,7 @@ Description: MiSurv is an integrative web cloud platform for processing, analyzi
 
 # Prerequites
 
-* For local implementation using this GitHub repository, recent version of R (> 4.2.0) is needed.
+* For local implementation using this GitHub repository, recent version of **R(> 4.2.0) is needed.
 
 shiny
 ```
