@@ -4,7 +4,7 @@ Title: MiSurv: An Integrative Web Cloud Platform for Comprehensive Microbiome Da
 
 Version: 1.0.0
 
-Date: 2023-07-09
+Date: 2023-07-12
 
 Maintainer: Won Gu <wpg5129@psu.edu> Hyojung Jang <hyojung.jang@northwestern.edu> 
 
@@ -36,6 +36,8 @@ Description: MiSurv is an integrative web cloud platform for processing, analyzi
 * Gu, W., Koh, H., Jang, H., Lee, B., Kang, B. (2023). MiSurv: An integrative web cloud platform for user-friendly microbiome data analysis with survival responses. *_Microbiology Spectrum_* 11(3): e05059-22
 
 # Prerequites
+
+*Local implementation using this GitHub repository requires recent version of R (> 4.2.0) is needed.
 
 shiny
 ```
