@@ -1082,9 +1082,9 @@ server = function(input, output, session) {
     updateSliderInput(session, "slider2", min = 0, max = maxi.slider2*100)
     
     observeEvent(c(input$surv.Time.select, input$censor.select),{
-      if (input$surv.Time.select == c("Choose one" = "", "") | input$censor.select == c("Choose one" = "", "") ){
+      if (input$surv.Time.select %in% c("Choose one" = "", "") | input$censor.select %in% c("Choose one" = "", "") ){
         disable("run")
-      } else if (input$surv.Time.select != c("Choose one" = "", "") & input$censor.select != c("Choose one" = "", "") ){
+      } else if (!(input$surv.Time.select %in% c("Choose one" = "", "")) & !(input$censor.select %in%  c("Choose one" = "", "")) ){
         enable("run")
       }
     })
