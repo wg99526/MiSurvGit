@@ -145,7 +145,7 @@ Ds.Ks.func <- function(rare.biom, biom.after.qc) {
 
 mirkatS.bin <- function(beta.bin.out) {
   set.seed(487)
-  out <- MiRKATS(obstime = as.numeric(beta.bin.out$con.var)-1,#beta.bin.out$con.var,
+  out <- MiRKATS(obstime = beta.bin.out$con.var,#beta.bin.out$con.var,
                  delta   = as.numeric(beta.bin.out$bin.var)-1,#beta.bin.out$bin.var,
                  X = NULL, 
                  Ks = beta.bin.out$Ks,
@@ -245,9 +245,10 @@ mirkatS.bin.plot3d <- function(out, beta.bin.out, mod, sub.tit) {
   
 }
 
+beta.bin.cov.out <- betaS.bin.cov.out
+
 mirkatS.bin.cov <- function(beta.bin.cov.out) {
   set.seed(487)
-  #if ( is.numeric( beta.bin.cov.out$  )  )
   
   cov.ls <- names(beta.bin.cov.out$cov.var)
   
@@ -260,9 +261,9 @@ mirkatS.bin.cov <- function(beta.bin.cov.out) {
   }
   
   out <- MiRKATS(#y = as.numeric(beta.bin.cov.out$bin.var)-1, 
-                 obstime = as.numeric(beta.bin.cov.out$con.var)-1,#beta.bin.out$con.var,
+                 obstime = as.numeric(beta.bin.cov.out$con.var),#beta.bin.out$con.var,
                  delta   = as.numeric(beta.bin.cov.out$bin.var)-1,#beta.bin.out$bin.var,
-                 X = as.vector(beta.bin.cov.out$cov.var),
+                 X =  as.vector(unlist(beta.bin.cov.out$cov.var)), 
                  beta = NULL,
                  Ks = beta.bin.cov.out$Ks,
                  nperm = 3000)
@@ -310,4 +311,5 @@ p.value.0.1 <- function(x, round.x = 3) {
   
   return(x)
 }
+
 
