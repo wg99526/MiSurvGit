@@ -245,8 +245,6 @@ mirkatS.bin.plot3d <- function(out, beta.bin.out, mod, sub.tit) {
   
 }
 
-beta.bin.cov.out <- betaS.bin.cov.out
-
 mirkatS.bin.cov <- function(beta.bin.cov.out) {
   set.seed(487)
   
