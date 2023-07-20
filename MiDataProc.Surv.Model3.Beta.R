@@ -24,7 +24,6 @@ library(ecodist)
 library(MiRKAT)
 #library(GLMMMiRKAT)
 library(proxy)
-library(vegan3d)
 #####################
 # Data manipulation #
 #####################
