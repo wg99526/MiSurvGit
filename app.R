@@ -31,7 +31,6 @@ library(bios2mds)
 library(zip)
 library(randomForestSRC)
 library(rgl)
-library(vegan3d)
 library(jpeg)
 library(splitTools)
 
