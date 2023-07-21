@@ -539,7 +539,7 @@ server = function(input, output, session) {
   otu.tab <- otu_table(ori.biom)
   tax.tab <- tax_table(ori.biom)
   tree <- phy_tree(ori.biom)
-  sam.dat <- sample_data(ori.biom)
+  sam.dat <- data.frame(sample_data(ori.biom))
   
   output$downloadData <- downloadHandler(
     filename = function() {
