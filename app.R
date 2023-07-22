@@ -2202,9 +2202,9 @@ server = function(input, output, session) {
           tagList(
             p(" ", style = "margin-top: +30px;"),
             h4(strong("# of Trees?", style = "color:black")),
-            p("The number of trees to be ensembled (default: 5,000).", style = "font-size:11pt"),
+            p("The number of trees to be ensembled (default: 10,000).", style = "font-size:11pt"),
             selectInput("surv4.tree.select", label = NULL,
-                        c("Choose one" = "", c(5000, 10000)), selected = "5000", width = '70%')
+                        c("Choose one" = "", c(10000, 30000)), selected = "10000", width = '70%')
           )
         })
         shinyjs::show("surv4.num.display")
@@ -4919,7 +4919,7 @@ server = function(input, output, session) {
         
         if (input$surv4.method.select == "Random survival forests") {
           incProgress(6/10, message = "Random survival forests")
-          set.seed(521)
+          
           rf.fit.out <- try(surv.random.forest(taxa.dat.4, chooseData$taxa.names.out, surv.dat, n.tree = trees, ranks.upto = ranks), silent = TRUE)
           
           importance <- list()
