@@ -24,78 +24,10 @@ library(betareg)
 
 library(caret)
 library(randomForest)
+library(randomForestSRC)
 library(glmnet)
 
-# surv.random.forest <- function(taxa.out, taxa.names.out, surv.dat, n.tree = 1000, n.fold = 10, tra.ratio = 0.8, ranks.upto = 5) { # taxa.out <- taxa.out$clr
-#   rf.fit <- list()
-#   mse <- numeric()
-#   if (is.null(ncol(surv.dat$survtime))) {
-#     survtime <- surv.dat$survtime
-#   } else {
-#     survtime <- matrix(ncol = 2)
-#     survtime <- surv.dat$survtime
-#   }
-#   
-#   censor <- surv.dat$status
-#   
-#   for(i in 1:ranks.upto){
-#     p <- ncol(taxa.out[[i]])
-#     dat <- taxa.out[[i]][rownames(surv.dat),]
-#     imp <- numeric()
-#     
-#     tra.ind <- sample(1:nrow(dat), ceiling(nrow(dat)*tra.ratio))
-#     
-#     tra.dat <- dat[tra.ind,]
-#     tes.dat <- dat[-tra.ind,]
-#     
-#     cens.tra.dat <- data.frame( "censor" = censor[tra.ind])
-#     cens.tes.dat <- data.frame( "censor" = censor[-tra.ind])
-#     
-#     if (is.null(ncol(surv.dat$survtime))) {
-#       time.tra.dat <- data.frame( "survtime" = survtime[tra.ind])
-#       time.tes.dat <- data.frame( "survtime" = survtime[-tra.ind])
-#       tra.dat <- cbind(time.tra.dat, cens.tra.dat, tra.dat)
-#       tes.dat <- cbind(time.tes.dat, cens.tes.dat, tes.dat)
-#     } else {
-#       time.tra.dat1 <- data.frame( "survtime1" = survtime[tra.ind,1])
-#       time.tes.dat1 <- data.frame( "survtime1" = survtime[-tra.ind,1])
-#       time.tra.dat2 <- data.frame( "survtime2" = survtime[tra.ind,2])
-#       time.tes.dat2 <- data.frame( "survtime2" = survtime[-tra.ind,2])
-#       tra.dat <- cbind(time.tra.dat1, time.tra.dat2, cens.tra.dat, tra.dat)
-#       tes.dat <- cbind(time.tes.dat1, time.tes.dat2, cens.tes.dat, tes.dat)
-#     }
-#     if(i == 1){
-#       print(cbind(time.tra.dat, cens.tra.dat))
-#       print(cbind(time.tes.dat, cens.tra.dat))
-#     }
-#     
-#     
-#     if (is.null(ncol(survtime))) {
-#       model <- tune(Surv(survtime, censor) ~., data = tra.dat, sampsize = function(x) {x * .632})
-#       # print(c(tune(Surv(survtime, censor) ~., data = tra.dat, folds = 10), tune(Surv(survtime, censor) ~., data = tra.dat, folds = 5)))
-#       # print(tune(Surv(survtime, censor) ~., data = tra.dat, folds = 10))
-#       mtry <- model$optimal[[2]]
-#       rf.fit[[i]] <- rfsrc(Surv(survtime, censor) ~ ., data = tra.dat, mtry = mtry, ntree = n.tree, importance = TRUE)
-#     } else {
-#       model <- tune(Surv(survtime2, censor) ~., data = tra.dat, sampsize = "????")
-#       # print(c(tune(Surv(survtime, censor) ~., data = tra.dat, folds = 10), tune(Surv(survtime, censor) ~., data = tra.dat, folds = 5)))
-#       # print(tune(Surv(survtime, censor) ~., data = tra.dat, folds = 10))
-#       mtry <- model$optimal[[2]]
-#       rf.fit[[i]] <- rfsrc(Surv(survtime1, survtime2, censor) ~ ., data = tra.dat, mtry = mtry, ntree = n.tree, importance = TRUE)
-#     }
-#     survtime.hat <- predict(rf.fit[[i]], newdata = tes.dat)$survival
-#     mse[i] <- mean((survtime.hat - survtime[-tra.ind])^2)
-#     names(rf.fit[[i]]$importance) <- taxa.names.out$names[[i]]
-#   }
-#   if(ranks.upto == 6) {
-#     names(rf.fit) <- c("phylum", "class", "order", "family", "genus", "species")
-#   } else if(ranks.upto == 5) {
-#     names(rf.fit) <- c("phylum", "class", "order", "family", "genus")
-#   }
-#   return(list(rf.fit = rf.fit, MSE = mse))
-# }
-
-surv.random.forest <- function(taxa.out, taxa.names.out, surv.dat, n.tree = 1000, bag.size = function(x){min(x * .632, max(150, x ^ (3/4)))}, ranks.upto = 5) { # taxa.out <- taxa.out$clr
+surv.random.forest <- function(taxa.out, taxa.names.out, surv.dat, n.tree = 1000, sam.size = function(x){min(x * .632, max(150, x ^ (3/4)))}, ranks.upto = 5) { # taxa.out <- taxa.out$clr
   rf.fit <- list()
   mse <- numeric()
   if (is.null(ncol(surv.dat$survtime))) {
@@ -112,15 +44,10 @@ surv.random.forest <- function(taxa.out, taxa.names.out, surv.dat, n.tree = 1000
     dat <- taxa.out[[i]][rownames(surv.dat),]
     imp <- numeric()
     
-    if (is.null(ncol(survtime))) {
-      model <- tune(Surv(survtime, censor) ~., data = cbind(surv.dat, dat), sampsize = bag.size)
-      mtry <- model$optimal[[2]]
-      rf.fit[[i]] <- rfsrc(Surv(survtime, censor) ~ ., data = cbind(surv.dat, dat), mtry = mtry, sampsize = bag.size, ntree = n.tree, importance = TRUE)
-    } else {
-      model <- tune(Surv(survtime2, censor) ~., data = dat, sampsize = bag.size)
-      mtry <- model$optimal[[2]]
-      rf.fit[[i]] <- rfsrc(Surv(survtime1, survtime2, censor) ~ ., data = dat, mtry = mtry, ntree = n.tree, importance = TRUE)
-    }
+    model <- tune(Surv(survtime, censor) ~., data = cbind(surv.dat, dat), sampsize = sam.size)
+    mtry <- model$optimal[[2]]
+    rf.fit[[i]] <- rfsrc(Surv(survtime, censor) ~ ., data = cbind(surv.dat, dat), mtry = mtry, sampsize = sam.size, ntree = n.tree, importance = TRUE)
+    
     names(rf.fit[[i]]$importance) <- taxa.names.out$names[[i]]
   }
   if(ranks.upto == 6) {
