@@ -44,6 +44,7 @@ surv.random.forest <- function(taxa.out, taxa.names.out, surv.dat, n.tree = 1000
     dat <- taxa.out[[i]][rownames(surv.dat),]
     imp <- numeric()
     
+    set.seed(521)
     model <- tune(Surv(survtime, censor) ~., data = cbind(surv.dat, dat), sampsize = sam.size)
     mtry <- model$optimal[[2]]
     rf.fit[[i]] <- rfsrc(Surv(survtime, censor) ~ ., data = cbind(surv.dat, dat), mtry = mtry, sampsize = sam.size, ntree = n.tree, importance = TRUE)
