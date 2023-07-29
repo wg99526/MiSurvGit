@@ -3493,6 +3493,7 @@ server = function(input, output, session) {
           
           if (include == FALSE){
             taxon.tab <- taxon.tab[!grepl("s_", taxon.tab$Taxon, fixed = TRUE), ]
+            ci.tab.all <- ci.tab.all[-(1+!grep("s_", taxon.tab$Taxon, fixed = TRUE))]
           }
           
           if ( length(ci.tab.all) > 1 ){
@@ -3699,6 +3700,7 @@ server = function(input, output, session) {
           
           if ( include == FALSE){
             taxon.tab <- taxon.tab[!grepl("s_", taxon.tab$Taxon, fixed = TRUE), ]
+            ci.tab.all <- ci.tab.all[-(1+!grep("s_", taxon.tab$Taxon, fixed = TRUE))]
           }
           
           if ( length(ci.tab.all) > 1 ){
@@ -3979,7 +3981,8 @@ server = function(input, output, session) {
           
           
           if ( include == FALSE){
-            taxon.tab <- try(taxon.tab[ !grepl("s_", taxon.tab$Taxon, fixed = TRUE), ], silent = TRUE) 
+            taxon.tab <- try(taxon.tab[ !grepl("s_", taxon.tab$Taxon, fixed = TRUE), ], silent = TRUE)
+            ci.tab.all <- try(ci.tab.all[-(1+!grep("s_", taxon.tab$Taxon, fixed = TRUE))], silent = TRUE)
           }
           
           if ( length(ci.tab.all) > 1 ){
@@ -4670,16 +4673,15 @@ server = function(input, output, session) {
           message("No outcome is available!")
           showModal(modalDialog(div("No outcome is available!")))
           return(NULL)})
-        
         taxon.tab <- taxa.sig$taxon.tab
         ci.tab.all <- taxa.sig$ci.tab.all
         
         if ( include == FALSE){
           taxon.tab <- taxon.tab[ !grepl("s_", taxon.tab$Taxon, fixed = TRUE), ]
+          ci.tab.all <- ci.tab.all[-(1+!grep("s_", taxon.tab$Taxon, fixed = TRUE))]
         }
         
         if ( length(ci.tab.all) > 1 ){
-          
           for( i in 1:nrow(taxon.tab)){
             if ( ci.tab.all[-1][i] < 0){
               taxon.tab[i,1] <- cell_spec(taxon.tab[i,1], "html", color = "blue")
