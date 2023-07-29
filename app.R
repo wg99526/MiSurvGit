@@ -1,10 +1,10 @@
 rm(list = ls())
-list.of.packages <- c('seqinr', 'shinydashboard', 'dashboardthemes', 'tidyverse', 'plotly', 'shinyWidgets', 'shinyjs', 'googleVis', 'xtable', 
-                      'DT', 'htmltools', 'phangorn', 'bios2mds', 'zip', 'zCompositions', 'dplyr', 'forestplot', 'quantreg', 'fossil', 'picante',
-                      'entropart', 'lme4', 'lmerTest', 'broom.mixed', 'gee', 'geepack', 'dirmult', 'robustbase', 'robCompositions', 'BiasedUrn',
-                      'CompQuadForm', 'GUniFrac', 'ecodist', 'MiRKAT', 'gridExtra', 'ggplot2', 'patchwork', 'ggthemes', 'erer', 'DiagrammeR', 'stringr',
-                      'devtools', 'betareg', 'nlme', 'glmm', 'remotes', 'gridGraphics', 'compositions', 'rgl', 'vegan3d', 'jpeg', 'splitTools', 
-                      'survival', 'survminer', 'coin', 'randomForestSRC', 'kableExtra', 'caret', 'randomForest', 'glmnet')
+list.of.packages <- c('seqinr', 'shiny', 'shinydashboard', 'dashboardthemes', 'tidyverse', 'shinyWidgets', 'shinyjs', 'googleVis', 'xtable', 'DT'
+                      , 'htmltools', 'bios2mds', 'zip', 'rgl', 'jpeg', 'splitTools', 'biomformat', 'survival', 'survminer', 'coin'
+                      , 'phangorn', 'phyloseq', 'zCompositions', 'plotly', 'dplyr', 'forestplot', 'quantreg', 'fossil', 'picante', 'entropart'
+                      , 'lme4', 'lmerTest', 'dirmult', 'robustbase', 'robCompositions', 'BiasedUrn', 'CompQuadForm', 'GUniFrac', 'ecodist', 'MiRKAT'
+                      , 'proxy', 'gridGraphics', 'gridExtra', 'ggplot2', 'patchwork', 'ggthemes', 'erer', 'DiagrammeR', 'stringr', 'devtools'
+                      , 'betareg', 'kableExtra', 'randomForestSRC')
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -17,22 +17,18 @@ library(shiny)
 library(shinydashboard)
 library(dashboardthemes)
 library(tidyverse)
-library(phyloseq)
-library(plotly)
 library(shinyWidgets)
 library(shinyjs)
 library(googleVis)
 library(xtable)
 library(DT)
 library(htmltools)
-library(biomformat)
-library(phangorn)
 library(bios2mds)
 library(zip)
-library(randomForestSRC)
 library(rgl)
 library(jpeg)
 library(splitTools)
+library(htmlwidgets)
 
 source("Source/MiDataProc.Data.Upload.R")
 source("Source/MiDataProc.Alpha.Cross.Sectional.R")
@@ -4828,7 +4824,8 @@ server = function(input, output, session) {
             paste("Taxa.Analysis.Graphical.Output", ".html", sep="")
           },
           content = function(file) {
-            htmlwidgets::saveWidget(as_widget(taxa.sig.dend(taxa.cox.out, chooseData$NAadded$tax.tab, "twopi", include)), file)
+            dend1 <- taxa.sig.dend(taxa.cox.out, chooseData$NAadded$tax.tab, "twopi", include)
+            htmlwidgets::saveWidget(as_widget(dend1), file)
           }
         )
         
