@@ -1,7 +1,5 @@
 library(biomformat)
 library(phangorn)
-#library(bios2mds)
-
 
 preprocess.tax.tab = function(tax.tab){
   trans.tax.tab <- matrix(NA, nrow(tax.tab), 7)

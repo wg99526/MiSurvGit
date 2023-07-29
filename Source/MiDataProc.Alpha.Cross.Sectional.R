@@ -1,7 +1,3 @@
-######################################
-# Quality control and transformation #
-######################################
-
 library(phangorn)
 library(phyloseq)
 library(zCompositions)

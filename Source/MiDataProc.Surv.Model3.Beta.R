@@ -1,30 +1,3 @@
-######################################
-# Quality control and transformation #
-######################################
-
-library(phangorn)
-library(phyloseq)
-library(zCompositions)
-library(plotly)
-library(dplyr)
-library(forestplot)
-library(quantreg)
-library(fossil)
-library(picante)
-library(entropart)
-library(lme4)
-library(lmerTest)
-library(dirmult) 
-library(robustbase)
-library(robCompositions) 
-library(BiasedUrn)
-library(CompQuadForm)
-library(GUniFrac) 
-library(ecodist) 
-library(MiRKAT)
-#library(GLMMMiRKAT)
-library(proxy)
-library(vegan3d)
 #####################
 # Data manipulation #
 #####################

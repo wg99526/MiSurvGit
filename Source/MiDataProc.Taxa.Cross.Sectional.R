@@ -1,17 +1,3 @@
-######################################
-# Quality control and transformation #
-######################################
-
-library(phangorn)
-library(phyloseq)
-library(zCompositions)
-library(plotly)
-library(dplyr)
-library(forestplot)
-library(quantreg)
-library(fossil)
-library(picante)
-library(entropart)
 library(gridGraphics)
 library(gridExtra)
 library(ggplot2)
@@ -22,7 +8,6 @@ library(DiagrammeR)
 library(stringr)
 library(devtools)
 library(betareg)
-
 library(kableExtra)
 
 tax.trans <- function(otu.tab, tax.tab, rare.otu.tab, rare.tax.tab, sub.com = TRUE, na.code = "NANANA") {
